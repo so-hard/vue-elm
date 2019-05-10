@@ -1,29 +1,15 @@
-# waim
+# 通过模仿elm来学习vue
 
-## Project setup
-```
-yarn install
-```
+## 参考的相关项目如下
+<!-- (vue2-elm)[https://github.com/bailicangdu/vue2-elm] -->
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## 运行
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## 技术栈
 
-### Run your tests
-```
-yarn run test
-```
++ vue技术栈
++ axios
++ stylus
++ element-ui
 
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 数据接口
