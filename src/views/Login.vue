@@ -40,7 +40,7 @@
 <script>
 // import Axios from "../plugins/axios.js";
 import { login, getCaptchas, signOut } from "../serve/getData.js";
-import {mapMutations} from 'vuex'
+import { mapMutations } from "vuex";
 // import { readlink } from 'fs';
 // axios.defaults.withCredentials = true
 export default {
@@ -67,36 +67,30 @@ export default {
       url: "https://shadow.elemecdn.com/faas/h5/static/logo.ba876fd.png"
     };
   },
-  created(){
-    this.getTheUrlBa64()
+  created() {
+    this.getTheUrlBa64();
   },
 
-
   methods: {
-    ...mapMutations([
-      'setUserInfo'
-    ]),
+    ...mapMutations(["setUserInfo"]),
 
     getTheUrlBa64() {
-      getCaptchas().then(
-        (response) => {
-          // console.log(response)  
-          // console.log(response.data.code, this.loginForm.url64);
-          //判断是否第一次加载验证码
-          if (response.status == 200 && this.loginForm.url64 !== '') {
-            this.isBuShow = true;
-            this.butConTxt = 6;
-            this.countDown();
-          }
-          //在给验证码赋值
-          this.loginForm.url64 = response.data.code;
+      getCaptchas().then(response => {
+        // console.log(response)
+        // console.log(response.data.code, this.loginForm.url64);
+        //判断是否第一次加载验证码
+        if (response.status == 200 && this.loginForm.url64 !== "") {
+          this.isBuShow = true;
+          this.butConTxt = 6;
+          this.countDown();
         }
-        
-      );
+        //在给验证码赋值
+        this.loginForm.url64 = response.data.code;
+      });
     },
 
-    signOut(){
-      signOut()
+    signOut() {
+      signOut();
     },
     //登陆方法
     log(formName) {
@@ -106,18 +100,17 @@ export default {
             this.loginForm.name,
             this.loginForm.pas,
             this.loginForm.mess
-          ).then((res)=> {
+          ).then(res => {
             let data = res;
-            if( data.data.status == 0 ){
-              return
+            if (data.data.status == 0) {
+              return;
             }
-            this.setUserInfo(data.data)
-            console.log(data.data)
-            this.$router.push('profile')
-            console.log(res)
+            this.setUserInfo(data.data);
+            console.log(data.data);
+            this.$router.push("profile");
+            console.log(res);
           });
         }
-        
       });
     },
 
@@ -141,7 +134,6 @@ export default {
     }
   },
   computed: {
-   
     //判断验证码的状态
     buttonIsDisabled() {
       let butShow = this.isBuShow;
@@ -160,7 +152,7 @@ export default {
       }
       return contxt;
     }
-  },
+  }
   // created() {
   //   this.getTheUrlBa64();
   // }
@@ -188,9 +180,12 @@ export default {
       margin: 15px 0 10px 0;
 
       .el-button {
-        font-size: 1.2em;
         margin-right: 15px;
         width: 80px;
+      }
+
+      .el-button--text{
+        font-size 16px;
       }
     }
   }
