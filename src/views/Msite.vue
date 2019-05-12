@@ -1,7 +1,7 @@
 <template>
   <div >
     <CommentHeader headerText="无法获取地理位置" headerIcon="#icon-search" routerNext="/order" @click="City()"/>
-    <el-carousel height="150px" :autoplay="false" indicator-position=none>
+    <el-carousel height="42vw" :autoplay="false" indicator-position=none>
       <el-carousel-item v-for="(card,index) in cards" :key="index">
         <MistCard v-for="(list,index) in card" :key="index" :text="list.text" :src="list.src"/>
       </el-carousel-item>
@@ -107,7 +107,7 @@ export default {
 
 <style lang='stylus' scoped>
 .el-carousel {
-  margin-top: 16vw;
+  margin: 16vw 0 25vw 0;
   .el-carousel__item {
     display flex
     flex-wrap wrap

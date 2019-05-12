@@ -2,8 +2,8 @@
 
 ## 参考项目如下
 
-+ [vue2-elm](https://github.com/bailicangdu/vue2-elm)
-+ [node-elm](https://github.com/bailicangdu/node-elm)
++ [vue2-elm](https://github.com/bailicangdu/vue2-elm) 参考写法以及样式的模仿
++ [node-elm](https://github.com/bailicangdu/node-elm) 后台api接口的调用
 
 ## 运行
 

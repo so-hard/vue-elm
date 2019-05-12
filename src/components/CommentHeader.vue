@@ -40,6 +40,7 @@ export default {
 
 <style lang="stylus" scoped>
 .comment-header
+    z-index 9999
     position fixed;
     top 0;
     width 100%
