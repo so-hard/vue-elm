@@ -103,7 +103,7 @@ export default {
         }
     },
     created() {
-        // console.log(userInfo)
+        console.log(this.userInfo)
         this.initCardData()
     },
     computed:{
@@ -138,7 +138,7 @@ export default {
 
 <style lang='stylus' scoped>
 .profile-header
-        margin-top 10vw
+        margin-top 15vw
 .profile-cards
     display flex
     margin 2vw 0

@@ -4,26 +4,31 @@ import {setStore} from '../extend/storage'
 // import Axios from '../extend/axios'
 
 const state = {
-    userInfo: null //object
+    userInfo: null, //object
+    userId: null
 }
 
 const getters = {
     currentUser:state => {
         return {
             userInfo: state.userInfo,
+            userId: state.userId
         }
     }
 }
 
 const mutations = {
-    setUserInfo(state,payload) {
-        console.log(typeof payload)
-        if(typeof payload == 'string'){
-            state.userInfo = JSON.parse(payload);
+    setUserInfo(state,info) {
+        if(typeof info == 'string'){
+            state.userInfo = JSON.parse(info);
+            console.log(state.userInfo)
         }else{
-            state.userInfo = payload
+            state.userInfo = info
         }
-        setStore('userinfo',payload);
+        setStore('userinfo',state.userInfo);
+    },
+    setUserId(state,id) {
+        state.userId = id;
     }
 }
 

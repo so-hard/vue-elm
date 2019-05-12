@@ -46,7 +46,7 @@ export default {
     color #fff
     display flex
     justify-content space-between
-    height 10vw
+    height 15vw
     align-items center
     background #42a5f5
 </style>

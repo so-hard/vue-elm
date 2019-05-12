@@ -51,7 +51,7 @@ export default {
   },
   created(){
       this.initData()
-      // console.log(this.userInfo)
+      console.log(typeof this.userInfo)
   }
 };
 </script>

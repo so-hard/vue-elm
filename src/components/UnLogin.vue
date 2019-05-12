@@ -28,7 +28,9 @@ export default {
 </script>
 
 <style scoped lang='stylus' >
-// .un-login
+.un-login
+  margin-top 15vw
+  padding 20px 0
 // margin 150px 0 0 0
 p {
   margin: 5px 0 5px 0;

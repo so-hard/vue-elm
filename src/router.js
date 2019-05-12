@@ -48,7 +48,7 @@ export default new Router({
         {
           path: 'orderlist',
           name: 'orderlist',
-          component: () => import('./components/OrderList.vue')
+          component: () => import('./components/order/OrderList')
         }
     ]
     },

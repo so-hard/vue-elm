@@ -28,17 +28,19 @@ export default {
 
   beforeMount() {
     console.log(getStore('userinfo'))
-
     if(getStore('userinfo')!=null){
       console.log(this.$route)
       this.$router.replace({name: 'orderlist'})
     }
+  },
+
+  created() {
+      // getOrder(1,10,0)
   }
 
 };
 </script>
 
 <style lang='stylus' scoped>
-.un-login
-  margin-top 10vh
+
 </style>

@@ -8,7 +8,7 @@
 // import FootGuide from "./components/FootGuide.vue";
 // import { METHODS } from 'http';
 import { getStore } from "./extend/storage.js";
-import {mapMutations} from "vuex"
+import {mapMutations,mapState} from "vuex"
 // import { userInfo } from 'os';
 export default {
   name: "app",
@@ -16,19 +16,32 @@ export default {
     // FootGuide
   },
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
     ...mapMutations([
-      'setUserInfo'
+      'setUserInfo',
+      'setUserId'
     ]),
+    
   },
-  computed: {},
+  computed: {
+    ...mapState({
+        userInfo:state => state.user.userInfo,
+    })
+
+  },
+
+
   created() {
-    let userInfo = getStore("userinfo")
-    if (userInfo != null) {
-      console.log(typeof userInfo)
-      this.setUserInfo(userInfo);
+    let userinfo = getStore("userinfo")
+    if (userinfo != null) {
+      // console.log(typeof userInfo)
+        // console.log(userInfo)
+      this.setUserInfo(userinfo);
+      this.setUserId(this.userInfo.user_id)
     }
   }
 };
@@ -44,8 +57,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
-  font-size: 5vw
+  font-size: 5vw;
+  background #fff
 }
 
 

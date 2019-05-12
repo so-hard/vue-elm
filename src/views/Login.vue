@@ -166,7 +166,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  padding 20px 0
   .login-img {
     margin-bottom: 10px;
   }
