@@ -20,9 +20,6 @@ export const getCity = () => Axios.get(
     'v1/cities',{
         params:{
             type: 'hot'
-
         }
-    }
-    
-    
+    }   
 )

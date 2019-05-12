@@ -1,5 +1,5 @@
 <template>
-  <div v-if="islogin">
+  <div class="foot-guide">
     <el-menu :defaultActive="activeDetection()" class="el-menu" mode="horizontal" :router="true">
       <el-menu-item
         v-for="(item,index) in this.navItems"
@@ -47,7 +47,7 @@ export default {
         }
       ],
       color: {
-        color: '#409EFF'
+        color: "#409EFF"
       }
     };
   },
@@ -56,8 +56,8 @@ export default {
     //   // console.log(key, keyPath, this.navItems);
     // },
 
-    green(index){
-    return  this.activeIndex == index ? this.color : ''
+    green(index) {
+      return this.activeIndex == index ? this.color : "";
     },
 
     iconClassName(index) {
@@ -76,13 +76,8 @@ export default {
       });
       return `${this.activeIndex}`;
     }
-    // loginDetection() {
-    //   this.islogin = (!this.$route.name == 'login')
-    // }
   },
-  computed: {
-    
-  },
+  computed: {},
   mounted() {
     // this.activeDetection()
   }
@@ -90,29 +85,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.el-menu {
-  box-shadow: 0 -0.266667vw 0.533333vw rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.foot-guide {
   position: fixed;
+  z-index: 100;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: 100vw;
 
-  .nav-item {
-    width: 25vw;
-    height: 14vw;
-    // font-size: ;
-    line-height: 5vw;
+  .el-menu {
+    box-shadow: 0 -0.266667vw 0.533333vw rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items center
-    // justify-items center
-    // justify-content space-between
-    // justify-content space-between
-    // height auto
-    // line-height 20px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+
+    .nav-item {
+      width: 25vw;
+      height: 14vw;
+      line-height: 4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 4vw;
+      // justify-items center
+      // justify-content space-between
+      // justify-content space-between
+      // height auto
+      // line-height 20px;
+    }
   }
 }
 </style>

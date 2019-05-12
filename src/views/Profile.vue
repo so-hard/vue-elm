@@ -29,6 +29,7 @@
             iconName="#icon-serve"
             routerNext="/order"
             liColor='#42a5f5'
+            style="margin-bottom: 14vw"
         />
         <FootGuide />
     </div>
@@ -136,6 +137,8 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+.profile-header
+        margin-top 10vw
 .profile-cards
     display flex
     margin 2vw 0

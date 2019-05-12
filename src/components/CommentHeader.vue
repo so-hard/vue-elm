@@ -6,12 +6,7 @@
       </svg>
     </div>
     <div class="header-text">{{headerText}}</div>
-    <div class="last-svg"
-    >
-    <svg class="icon" aria-hidden="true">
-        <use :xlink:href="lastIcon"></use>
-      </svg>   
-    </div>
+    <div></div>
   </div>
 </template>
 
@@ -25,10 +20,9 @@ export default {
 
     };
   },
-  props: ["headerIcon", "headerText",'lastIcon','routerNext' ],
+  props: ["headerIcon", "headerText",'routerNext' ],
   methods: {
     go(){
-      // alert(1)
       if(this.routerNext){
         router.push(this.routerNext)
       }else{
@@ -40,13 +34,15 @@ export default {
       showIcon(){
         return  this.headerIcon ? this.headerIcon : this.defineIcon
       },
-      
   }
 };
 </script>
 
 <style lang="stylus" scoped>
 .comment-header
+    position fixed;
+    top 0;
+    width 100%
     color #fff
     display flex
     justify-content space-between

@@ -4,7 +4,6 @@
     headerText="我的订单"
     />
     <router-view></router-view>
-    <!-- <UnLogin> </UnLogin>    -->
     <FootGuide/>
   </div>
 </template>
@@ -27,7 +26,7 @@ export default {
     }
   },
 
-  mounted() {
+  beforeMount() {
     console.log(getStore('userinfo'))
 
     if(getStore('userinfo')!=null){

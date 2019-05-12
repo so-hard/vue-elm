@@ -1,12 +1,20 @@
 <template>
   <div @click="City()">
     <CommentHeader
-
-      headerText="1"
+      headerText="无法获取地理位置"
       headerIcon="#icon-search"
-      lastIcon="#icon-profile"
       routerNext="/order"
-    />Msite
+    />
+     <el-carousel 
+     height="150px"
+     :autoplay=false
+     >
+      <el-carousel-item 
+      v-for="item in 2" 
+      :key="item">
+        <h3 class="small">{{ item }}</h3>
+      </el-carousel-item>
+    </el-carousel>
     <FootGuide/>
   </div>
 </template>
@@ -23,16 +31,21 @@ export default {
     CommentHeader
   },
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods:{
-      City(){
-        getCity()
-  }
+  methods: {
+    City() {
+      getCity();
+    }
+  },
+  beforeMount(){
+    
   }
 };
 </script>
 
-<style lang='stylus' scoped></style>
+<style lang='stylus' scoped>
+.el-carousel
+  margin-top 10vw
+  
+</style>
