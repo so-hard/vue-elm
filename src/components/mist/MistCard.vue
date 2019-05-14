@@ -20,7 +20,8 @@ export default {
 
 <style lang="stylus" scoped>
 .mist-card
-    width 20vw
+    width 19vw
+    height 22vw
     display flex
     flex-direction column
     justify-items center

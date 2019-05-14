@@ -46,9 +46,9 @@ export default new Router({
           redirect: 'unlogin'
         },
         {
-          path: 'orderlist',
-          name: 'orderlist',
-          component: () => import('./components/order/OrderList')
+          path: 'orderul',
+          name: 'orderul',
+          component: () => import('./components/order/OrderUl')
         }
     ]
     },

@@ -110,7 +110,6 @@ export default {
     ...mapState({
         userInfo:state => state.user.userInfo,
     }),
-       
     },
     methods: {
         //初始化数据
@@ -118,7 +117,7 @@ export default {
             if(this.userInfo != null){
                 this.cards.forEach(
                     (value,index,)=>{
-                        console.log(value,index)
+                        // console.log(value,index)
                         if (index == 1) {
                             console.log(this.userInfo.gift_amount)
                             value.num = this.userInfo.gift_amount
@@ -127,7 +126,7 @@ export default {
                 )
             }
         },
-         addBott(index){
+        addBott(index){
             if(index != 2){
                return 'bootom'
             } 

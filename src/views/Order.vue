@@ -2,6 +2,7 @@
   <div class="order">
     <CommentHeader
     headerText="我的订单"
+    
     />
     <router-view></router-view>
     <FootGuide/>
@@ -16,7 +17,6 @@ import {getStore} from "../extend/storage.js"
 export default {
   name: "order",
   components: {
-    // UnLogin,
     FootGuide,
     CommentHeader
   },
@@ -30,7 +30,7 @@ export default {
     console.log(getStore('userinfo'))
     if(getStore('userinfo')!=null){
       console.log(this.$route)
-      this.$router.replace({name: 'orderlist'})
+      this.$router.replace({name: 'orderul'})
     }
   },
 
