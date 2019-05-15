@@ -14,7 +14,7 @@
     yarn serve
 ```
 
-[预览地址](https://so-hard.github.io/vue-elm/dist)
+[预览地址](http://112.74.52.54:8080/#/msite)
 
 ## 技术栈
 
