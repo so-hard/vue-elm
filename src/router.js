@@ -35,22 +35,6 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: () => import('./views/Order.vue'),
-      children: [
-        {
-          path: 'unlogin',
-          name: 'unLogin',
-          component: () => import('./components/UnLogin.vue')
-        },
-        {
-          path: '',
-          redirect: 'unlogin'
-        },
-        {
-          path: 'orderul',
-          name: 'orderul',
-          component: () => import('./components/order/OrderUl')
-        }
-    ]
     },
     {
       path: '/profile',

@@ -41,7 +41,7 @@ export default {
       // console.log(typeof userInfo)
         // console.log(userInfo)
       this.setUserInfo(userinfo);
-      this.setUserId(this.userInfo.user_id)
+      
     }
   }
 };

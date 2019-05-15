@@ -30,6 +30,7 @@
             ></el-image>
           </el-input>
         </el-form-item>
+        <p style="color:red">没有帐号默认注册</p>
         <el-button type="success" @click="log('loginForm')">登录</el-button>
         <!-- <el-button type="success" @click="signOut()">退出</el-button> -->
       </el-form>
@@ -161,6 +162,7 @@ export default {
 
 <style scoped lang="stylus"  >
 .login {
+  font-size 16px;
   margin: 20vh auto;
   width: 328px;
   display: flex;
@@ -185,7 +187,7 @@ export default {
       }
 
       .el-button--text{
-        font-size 16px;
+        // font-size 16px;
       }
     }
   }
