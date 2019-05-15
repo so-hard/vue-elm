@@ -1,3 +1,5 @@
 module.exports = {
-    publicPath: ''
+    publicPath: '',
+    outputDir: '~/www/vue-elm',
+    productionSourceMap: false
   }
