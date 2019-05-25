@@ -40,7 +40,7 @@ export default {
 
 <style lang="stylus" scoped>
 .comment-header
-    z-index 9999
+    z-index 99
     position fixed;
     top 0;
     width 100%
@@ -49,6 +49,6 @@ export default {
     justify-content space-between
     height 15vw
     align-items center
-    background #42a5f5
+    background linear-gradient(to right,#42a5f5, #2979ff);
 </style>
 

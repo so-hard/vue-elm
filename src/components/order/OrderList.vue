@@ -1,5 +1,5 @@
 <template>
-  <div class="order-list">
+  <div class="order-list" @click="goto(listData.unique_id)" >
     <div class="list-img">
       <img :src="imgBase+listData.restaurant_image_url" alt>
     </div>
@@ -29,6 +29,15 @@ export default {
     };
   },
   props:['listData'],
+  methods: {
+    goto(orderNum){
+      console.log(111)
+      this.$router.push({
+        path:`order/detail/${orderNum}`
+        
+      })
+    }
+  }
 
 };
 </script>

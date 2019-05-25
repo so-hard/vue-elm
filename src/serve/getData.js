@@ -26,6 +26,9 @@ export const getOrder = (user_id,limit,offset) => Axios.get(
     }
 )
 
+export const getOrderDetail = (user_id,order_id) =>Axios.get(
+    `bos/v1/users/${user_id}/orders/${order_id}/snapshot`
+)
 
 
 export const getCity = () => Axios.get(

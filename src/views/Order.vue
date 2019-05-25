@@ -6,6 +6,7 @@
     <UnLogin v-if="isShow"/>
     <OrderUl  v-if="!isShow"/>
     <FootGuide />
+    <router-view></router-view>
   </div>
 </template>
 
