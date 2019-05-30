@@ -21,7 +21,7 @@ const mutations = {
     setUserInfo(state,info) {
         if(typeof info == 'string'){
             state.userInfo = JSON.parse(info);
-            console.log(state.userInfo)
+            // console.log(state.userInfo)
         }else{
             state.userInfo = info
         }

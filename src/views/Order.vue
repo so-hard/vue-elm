@@ -42,6 +42,8 @@ export default {
        userInfo:state => state.user.userInfo,
        userId: state => state.user.userId
     }),
+
+    //判断是否登录然后设置vuex的userid
     isShow() {
       if(this.userInfo != null) {
         this.setUserId(this.userInfo.user_id)

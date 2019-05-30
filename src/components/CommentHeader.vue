@@ -1,12 +1,16 @@
 <template>
   <div class="comment-header">
-    <div class="header-svg" @click="go()">
+      <div class="header-svg" @click="headGo()">
       <svg class="icon" aria-hidden="true">
-        <use :xlink:href="showIcon"></use>
+        <use :xlink:href="showHeaderIcon"></use>
       </svg>
     </div>
-    <div class="header-text">{{headerText}}</div>
-    <div></div>
+    <div class="header-text" @click="textGo()">{{headerText}}</div>
+    <div @click="footerGo()">
+      <svg class="icon" aria-hidden="true">
+        <use :xlink:href="showFooterIcon"></use>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -17,23 +21,39 @@ export default {
   data() {
     return {
         defineIcon: '#icon-rerurn',
+        defineFooterIcon: ''
 
     };
   },
-  props: ["headerIcon", "headerText",'routerNext' ],
+  //传入三个props 左边的图标 文字  左边图标的转跳， footerRouter
+  props: ["headerIcon",'routerNext', "headerText","textRouter",'footerIcon','footerRouter' ],
   methods: {
-    go(){
+    headGo(){
       if(this.routerNext){
         router.push(this.routerNext)
       }else{
         router.go(-1)
       }
+    },
+    textGo() {
+      if(this.textRouter){
+        router.push(this.textRouter)
+      }
+      
+    },
+    footerGo (){
+      if(this.footerRouter){
+        router.push(this.footerRouter)
+      }
     }
   },
   computed: {
-      showIcon(){
+      showHeaderIcon(){
         return  this.headerIcon ? this.headerIcon : this.defineIcon
       },
+      showFooterIcon(){
+        return  this.footerIcon ? this.footerIcon : this.defineFooterIcon
+      }
   }
 };
 </script>

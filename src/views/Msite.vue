@@ -1,6 +1,6 @@
 <template>
   <div >
-    <CommentHeader headerText="无法获取地理位置" headerIcon="#icon-search" routerNext="/order" @click="City()"/>
+    <CommentHeader headerText="无法获取地理位置" textRouter="/city" headerIcon="#icon-search" routerNext="/order" />
     <el-carousel height="45vw" :autoplay="false" indicator-position=none>
       <el-carousel-item v-for="(card,index) in cards" :key="index">
         <MistCard v-for="(list,index) in card" :key="index" :text="list.text" :src="list.src"/>
@@ -15,7 +15,8 @@ import FootGuide from "../components/FootGuide.vue";
 import CommentHeader from "../components/CommentHeader.vue";
 import MistCard from "../components/mist/MistCard.vue";
 
-import { getCity } from "../serve/getData";
+// import { getCity } from "../serve/getData";
+
 
 export default {
   name: "msite",
@@ -97,11 +98,11 @@ export default {
     };
   },
   methods: {
-    City() {
-      getCity();
-    }
+  
   },
-  beforeMount() {}
+  created() {
+    
+  }
 };
 </script>
 

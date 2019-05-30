@@ -31,10 +31,8 @@ export const getOrderDetail = (user_id,order_id) =>Axios.get(
 )
 
 
-export const getCity = () => Axios.get(
-    'v1/cities',{
-        params:{
-            type: 'hot'
-        }
+export const getCity = (type) => Axios.get(
+    `v1/cities/?type=${type}`,{
+        
     }   
 )
