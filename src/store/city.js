@@ -1,27 +1,26 @@
 // import {setStore} from '../extend/storage'
-import {getCity} from '../serve/getData'
 
 const state = {
-    curCity : '无法获取地理位置'
+    curCity : null
+    // cityId: []
 },
  getters = {
     currentCuty:state => {
         return {
             curCity: state.curCity,
+            // cityId: state.cityId
         }
     }
 }, 
 actions = {
-    setCurCity ({commit},{type}) {
-        return getCity(type)
-    }
+    // setCurCity ({commit},{type}) {
+    //     return getCity(type)
+    // }
 },
 
  mutations = {
-    setCurCity(state,city) {
-        // getCity()
+    setCityId(state,city) {
         state.curCity = city
-        console.log(state.curCity)
     }
 }
 

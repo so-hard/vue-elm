@@ -53,6 +53,16 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('./views/City.vue')
+      
+    },
+    {
+      path: '/cityList',
+      name: 'citylist',
+      component: () => import('./views/city/cityList.vue'),
+      // children: [
+      //   path: '/'
+      // ]
+      
     }
   ]
 })
