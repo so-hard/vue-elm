@@ -11,17 +11,26 @@ Vue.config.productionTip = false
 Vue.directive('scroll', {
   inserted: function (el, binding) {
     // console.log(binding.value)
+    // let debounceTimeout = null
+
+    //节流
+    let Timeout;
     let f = function () {
-      if (binding.value.hey(el,binding.value.val)) {
-        console.log(111)
-        window.removeEventListener('scroll', f)
-      }
+      // console.log(111)
+      binding.value.hey(el, binding.value.val)
+      Timeout = null
     }
-    
-  //   let f = function () {
-     
-  //   }
-  window.addEventListener('scroll', f)
+    const onScoll = () => {
+      if (!Timeout)
+        Timeout = setTimeout(f, 800)
+    }
+
+    el._onScroll = onScoll
+    window.addEventListener('scroll', onScoll)
+  },
+
+  unbind: function(el,binding) {
+    window.removeEventListener('scroll',el._onScroll);
   }
 })
 new Vue({

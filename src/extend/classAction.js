@@ -12,3 +12,5 @@ export function removeClass(node, className){
         node.removeAttribute("class")
     }
 }
+
+//防抖

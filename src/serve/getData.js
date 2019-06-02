@@ -1,7 +1,6 @@
 import Axios from '../extend/axios'
 
 
-
 export const login = (username, password, captcha_code) => Axios.post(
     'v2/login',
     {
@@ -31,8 +30,18 @@ export const getOrderDetail = (user_id,order_id) =>Axios.get(
 )
 
 
+//获取城市
 export const getCity = (type) => Axios.get(
     `v1/cities/?type=${type}`,{
         
     }   
+)
+
+export const getDeteilAddress = (city_id,keyword) => Axios.get(
+    `v1/pois`,{
+        params:{
+            city_id,
+            keyword
+        }
+    }
 )

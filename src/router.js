@@ -1,9 +1,11 @@
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
 
 
 import Msite from './views/Msite.vue'
+import { comment } from 'postcss';
 Vue.use(Router)
 
 export default new Router({
@@ -18,7 +20,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: ()=> import('./views/Login.vue')
+      component: () => import('./views/Login.vue')
     },
     {
       path: '/msite',
@@ -53,15 +55,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('./views/City.vue')
-      
     },
     {
       path: '/cityList',
       name: 'citylist',
       component: () => import('./views/city/cityList.vue'),
-      // children: [
-      //   path: '/'
-      // ]
       
     }
   ]

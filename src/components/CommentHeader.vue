@@ -70,5 +70,10 @@ export default {
     height 15vw
     align-items center
     background linear-gradient(to right,#42a5f5, #2979ff);
+    .header-text
+      width 50% 
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
 </style>
 

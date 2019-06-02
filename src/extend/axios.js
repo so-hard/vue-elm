@@ -10,7 +10,7 @@ const Axios = axios.create({
 
 Axios.interceptors.response.use(
     res => {
-        console.log(res)
+        // console.log(res)
         if(res.data && res.data.status==0){
             // 调用message 来显示错误消息
             Message(
