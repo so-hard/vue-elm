@@ -67,6 +67,7 @@ export default {
       this.$store.commit('setCurAddress',list);
       this.curAddress = list
       this.keyWorld = '';
+      this.$router.push('/msite')
     }
   },
   computed: {

@@ -73,8 +73,8 @@ export default {
       this.$router.push('/city')
     },
 
-    //判断被浏览器卷走的高度
     hey(el,val){
+      //判断被浏览器卷走的高度
       // console.log(arguments)
        if( window.scrollY >= val.off && window.scrollY < val.off+ val.hight-10){
         // console.log("skr")

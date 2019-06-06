@@ -1,7 +1,7 @@
 <template>
-    <div class="mist-card" @click="router.push(rou)">
+    <div class="mist-card" @click="goto">
         <div class="card-img">
-            <img :src="src" alt="">
+            <img :src="imgBase+src" alt="">
         </div>
         <span>{{text}}</span>
     </div>
@@ -9,18 +9,24 @@
 
 <script>
 export default {
-    name: 'MistCard',
+    name: 'MsiteCard',
     props: ['src','text','rou'],
+    data(){
+        return {
+            imgBase: "https://fuss10.elemecdn.com",
+        }
+    },
     methods: {
-    
+        goto(){
+            this.$router.push('shop')
+        }
     }
-
 }
 </script>
 
 <style lang="stylus" scoped>
 .mist-card
-    width 19vw
+    width 24vw
     height 22vw
     display flex
     flex-direction column
@@ -28,8 +34,8 @@ export default {
     align-items center
     font-size 0.8em
     .card-img
-        height 12vw
-        width 12vw
+        height 15vw
+        width 15vw
         img 
             height 100%
             width 100%

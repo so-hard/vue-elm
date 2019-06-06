@@ -34,7 +34,6 @@ export default {
       console.log(111)
       this.$router.push({
         path:`order/detail/${orderNum}`
-        
       })
     }
   }
@@ -43,10 +42,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-fontOver()
-  text-overflow ellipsis
-  white-space nowrap
-  overflow hidden
+@import "../../assets/css/mix"
 
 
 .order-list

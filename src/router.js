@@ -5,7 +5,6 @@ import Router from 'vue-router'
 
 
 import Msite from './views/Msite.vue'
-import { comment } from 'postcss';
 Vue.use(Router)
 
 export default new Router({
@@ -61,6 +60,11 @@ export default new Router({
       name: 'citylist',
       component: () => import('./views/city/cityList.vue'),
       
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('./views/shop.vue')
     }
   ]
 })

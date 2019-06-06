@@ -45,3 +45,35 @@ export const getDeteilAddress = (city_id,keyword) => Axios.get(
         }
     }
 )
+
+export const getFoodType = () => Axios.get(
+    'v2/index_entry'
+)
+
+export const getShoppingRestaurants = ({
+    latitude,
+    longitude,
+    offset = 0,
+    limit = 20,
+    restaurant_category_id ,
+    order_by,
+    delivery_mode,
+    support_ids,
+    restaurant_category_ids,
+
+}
+) => Axios.get(
+    'shopping/restaurants', {
+        params: {
+            latitude,
+            longitude,
+            offset,
+            limit,
+            restaurant_category_id ,
+            order_by,
+            delivery_mode,
+            support_ids,
+            restaurant_category_ids,
+        }
+    }
+)

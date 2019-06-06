@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view ></router-view>
-    <!-- <router-view name="app"></router-view> -->
   </div>
 </template>
 
@@ -59,7 +58,7 @@ export default {
   text-align center
   color: #2c3e50;
   font-size: 5vw;
-  background #fff
+  // background #fff
 }
 
 
