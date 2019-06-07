@@ -82,9 +82,7 @@ export default {
   //   }
   // },
   created() {
-  
       this.city = this.$store.getters.curCity;
-    
       this.curAddress = this.$store.getters.curAddress 
   },
   

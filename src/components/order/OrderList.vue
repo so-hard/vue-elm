@@ -46,6 +46,7 @@ export default {
 
 
 .order-list
+    background #fff
     text-align left 
     margin 5px
     display flex

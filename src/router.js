@@ -62,9 +62,10 @@ export default new Router({
       
     },
     {
-      path: '/shop',
+      path: '/shop:text',
       name: 'shop',
-      component: () => import('./views/shop.vue')
+      component: () => import('./views/shop.vue'),
+      props: true 
     }
   ]
 })

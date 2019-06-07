@@ -19,7 +19,7 @@
     </el-carousel>
     <section class="msite-shop">
       <p>附近商家</p>
-      <shop/>
+      <ShopMain/>
     </section>
     <FootGuide/>
   </div>
@@ -29,7 +29,7 @@
 import FootGuide from "../components/FootGuide.vue";
 import CommentHeader from "../components/CommentHeader.vue";
 import MsiteCard from "../components/msite/MsiteCard.vue";
-import shop from "./shop.vue"
+import ShopMain from "../components/shop/ShopMain"
 
 import { getFoodType } from "../serve/getData";
 
@@ -39,7 +39,7 @@ export default {
     FootGuide,
     CommentHeader,
     MsiteCard,
-    shop
+    ShopMain
   },
   data() {
     return {

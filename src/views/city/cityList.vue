@@ -1,5 +1,7 @@
 <template>
-  <section class="city">
+  <section class="city" 
+    v-loading = 'loading'
+  >
     <CommentHeader headerText="选择城市"/>
     <section class="hot-city">
       <el-tag v-for="(city) in hotCity" 
@@ -50,7 +52,8 @@ export default {
       //热门城市
       hotCity: "",
       allCity: "",
-      headTop: []
+      headTop: [],
+      loading: true
     };
   },
   components: {
@@ -104,14 +107,14 @@ export default {
     },
 
   },
-  beforeCreate() {
+  async beforeCreate() {
     //热门城市
-    getCity('hot').then(res => {
+   await getCity('hot').then(res => {
       this.hotCity = res.data;
     });
 
     //所有城市
-    getCity('group').then(res => {
+   await getCity('group').then(res => {
       this.allCity = res.data;
       this.$nextTick(() => {
         let cityHead = this.$refs.cityHead;
@@ -130,6 +133,7 @@ export default {
         });
       });
     });
+    this.loading = false
     // console.log(this.hotCity)
   },
   mounted() {

@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         goto(){
-            this.$router.push('shop')
+            this.$router.push({ name: 'shop', params: { text: this.text }})
         }
     }
 }
