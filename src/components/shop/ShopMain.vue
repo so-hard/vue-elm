@@ -11,8 +11,9 @@
           <h4 class="list-name">{{list.name}}</h4>
         </div>
         <div class="list-second">
-          <div>
-            <div>{{list.rating}}月售{{list.recent_order_num}}单</div>
+          <div class="second-left">
+            <Rate :rate="list.rating"/>
+              {{list.rating}}月售{{list.recent_order_num}}单
           </div>
           <div class="feng-bird"
                 v-if="list.delivery_mode != null ? true : false"
@@ -31,12 +32,13 @@
 </template>
 
 <script>
+import Rate from "./Rate"
 import { getShoppingRestaurants } from "../../serve/getData";
 
 export default {
   name: "ShopMain",
   components: {
-    
+    Rate
   },
   props: ['text'],
   data() {
@@ -45,7 +47,8 @@ export default {
       RestaurantList: null,
       baseImg: "//elm.cangdu.org/img/",
       offset: 0,
-      loadingConr: false
+      loadingConr: false,
+      rate: ''
     };
   },
   computed: {
@@ -83,7 +86,7 @@ export default {
           });
         }
       });
-    }
+    },
   },
       created() {
     this.curAddress = this.$store.getters.curAddress;
@@ -105,6 +108,7 @@ export default {
   border-bottom: 2px solid #dcdfe6;
 
   .list-left {
+    z-index 22
     height: w = 20vw;
     width: w;
     margin: auto 1vw;
@@ -156,6 +160,17 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .second-left {
+        display flex
+        align-items center
+        height 5vw
+        .rate {
+          height  5vw
+          overflow hidden
+        }
+        // overflow hidden
+      }
 
       .feng-bird {
         padding: 1vw;

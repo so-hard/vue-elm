@@ -17,7 +17,7 @@
         <el-form-item class="form-item-mess" prop="mess">
           <el-input v-model="loginForm.mess" placeholder="验证码" style="heigit" size="large">
             <el-button
-              slot="suffix"
+              slot="append"
               type="text"
               :disabled="buttonIsDisabled"
               @click="getTheUrlBa64"
@@ -168,7 +168,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding 20px 0
+  padding 20px 3vw
+  background #fff
+
   .login-img {
     margin-bottom: 10px;
   }
