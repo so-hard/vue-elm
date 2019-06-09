@@ -18,7 +18,19 @@ Axios.interceptors.response.use(
                     message: res.data.message,
                     type: "error",
                     duration: 1200,
-                    showClose: true
+                    showClose: true,
+                    offset: 200
+                }
+            );
+        }
+        if(res.data.length == 0) {
+            Message(
+                {
+                    message: "没有更多数据了",
+                    type: "error",
+                    duration: 1200,
+                    showClose: true,
+                    offset: 200
                 }
             );
         }

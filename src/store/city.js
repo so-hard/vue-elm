@@ -6,13 +6,13 @@ const state = {
     curCity: null,
     keyworld: '',
     curAddress: null,
-    defaultAddress: { 
-    name: "田林十一村", 
-    address: "上海市徐汇区田林", 
-    latitude: 31.17158, 
-    longitude: 121.42575, 
-    geohash: "31.17158,121.42575" 
-}
+    defaultAddress: {
+        name: "田林十一村",
+        address: "上海市徐汇区田林",
+        latitude: 31.17158,
+        longitude: 121.42575,
+        geohash: "31.17158,121.42575"
+    }
 },
     getters = {
         curCity: state => {

@@ -29,7 +29,7 @@ Vue.directive('scroll', {
     window.addEventListener('scroll', onScoll)
   },
 
-  unbind: function(el,binding) {
+  unbind: function(el) {
     window.removeEventListener('scroll',el._onScroll);
   }
 })

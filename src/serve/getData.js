@@ -78,4 +78,6 @@ export const getShoppingRestaurants = ({
     }
 )
 
-// export const get
+export const getResCategory= () => Axios.get(
+    'shopping/v2/restaurant/category'
+)

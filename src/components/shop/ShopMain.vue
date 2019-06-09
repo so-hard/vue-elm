@@ -1,7 +1,6 @@
 <template>
-  <section class="shop-main"
-  v-scroll="{hey,offset}"
-  > 
+  <section class="shop-main" v-scroll="{hey,offset}"
+  >
     <section class="shop-list" v-for="(list) in RestaurantList" :key="list.id">
       <div class="list-left">
         <img :src="baseImg + list.image_path" alt>
@@ -13,10 +12,11 @@
         <div class="list-second">
           <div class="second-left">
             <Rate :rate="list.rating"/>
-              {{list.rating}}月售{{list.recent_order_num}}单
+            {{list.rating}}月售{{list.recent_order_num}}单
           </div>
-          <div class="feng-bird"
-                v-if="list.delivery_mode != null ? true : false"
+          <div
+            class="feng-bird"
+            v-if="list.delivery_mode != null ? true : false"
           >{{list.delivery_mode.text}}</div>
         </div>
         <div class="list-third">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Rate from "./Rate"
+import Rate from "./Rate";
 import { getShoppingRestaurants } from "../../serve/getData";
 
 export default {
@@ -40,7 +40,7 @@ export default {
   components: {
     Rate
   },
-  props: ['text'],
+  props: ["text"],
   data() {
     return {
       curAddress: null,
@@ -48,7 +48,8 @@ export default {
       baseImg: "//elm.cangdu.org/img/",
       offset: 0,
       loadingConr: false,
-      rate: ''
+      rate: "",
+        
     };
   },
   computed: {
@@ -58,26 +59,28 @@ export default {
         longitude: this.curAddress.longitude,
         offset: this.offset,
         limit: 20,
-        restaurant_category_id: null,
+        restaurant_category_id: [],
         order_by: null,
         delivery_mode: null,
-        support_ids: null,
-        restaurant_category_ids: null
+        support_ids: [],
+        restaurant_category_ids: this.$store.getters.getRestaurantId
       };
-    }
+    },
+    
   },
   methods: {
     hey() {
-        if( 
-            window.scrollY + document.documentElement.clientHeight == document.documentElement.scrollHeight
-            ){  
-                this.loadingConr = true
-                this.offset +=20
-                this.getRestaurantList()
-            }
+      if (
+        window.scrollY + document.documentElement.clientHeight ==
+        document.documentElement.scrollHeight
+      ) {
+        this.loadingConr = true;
+        this.offset += 20;
+        this.getRestaurantList();
+      }
     },
-     getRestaurantList() {
-       getShoppingRestaurants(this.getShopPara).then(res => {
+    getRestaurantList() {
+      getShoppingRestaurants(this.getShopPara).then(res => {
         if (this.RestaurantList == null) {
           this.RestaurantList = res.data;
         } else {
@@ -85,19 +88,28 @@ export default {
             this.RestaurantList.push(element);
           });
         }
+        this.loadingConr = false
       });
-    },
+    }
   },
-      created() {
+  mounted() {
+    this.loadingConr = true
     this.curAddress = this.$store.getters.curAddress;
     this.getRestaurantList();
   },
+  watch:{
+    "$store.state.shop.restaurant_category_id":function () {
+      this.loadingConr = true
+      this.offset = 0
+      this.RestaurantList = null
+      this.getRestaurantList()
+    }
+  }
 };
 </script>
 
 <style lang="stylus" scoped>
-@import "../../assets/css/mix"
-
+@import '../../assets/css/mix';
 
 .shop-list {
   height: 30vw;
@@ -108,7 +120,7 @@ export default {
   border-bottom: 2px solid #dcdfe6;
 
   .list-left {
-    z-index 22
+    z-index: 22;
     height: w = 20vw;
     width: w;
     margin: auto 1vw;
@@ -120,10 +132,11 @@ export default {
   }
 
   .list-right {
-    display flex
-    flex-direction column
+    display: flex;
+    flex-direction: column;
     width: 80vw;
     margin: auto 1vw;
+
     .list-floor {
       display: flex;
       align-items: center;
@@ -137,9 +150,10 @@ export default {
         padding: 1vw;
         margin: 1vw;
       }
-      h4{
-        width 50vw
-        fontOver()
+
+      h4 {
+        width: 50vw;
+        fontOver();
       }
     }
 
@@ -162,14 +176,14 @@ export default {
       align-items: center;
 
       .second-left {
-        display flex
-        align-items center
-        height 5vw
+        display: flex;
+        align-items: center;
+        height: 5vw;
+
         .rate {
-          height  5vw
-          overflow hidden
+          height: 5vw;
+          overflow: hidden;
         }
-        // overflow hidden
       }
 
       .feng-bird {
