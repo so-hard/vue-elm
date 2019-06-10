@@ -57,8 +57,6 @@ export default {
     },
     getRestaurantList() {
       this.loadingConr = true;
-      this.offset = 0;
-      this.RestaurantList = null;
       getShoppingRestaurants(this.getShopPara).then(res => {
         if (this.RestaurantList == null) {
           this.RestaurantList = res.data;
@@ -77,9 +75,15 @@ export default {
   },
   watch: {
     "$store.state.shop.restaurant_category_id":function(){
+      this.offset = 0;
+      this.RestaurantList = null;
+
     this.getRestaurantList()
     },
     "$store.state.shop.order_by":function(){
+      this.offset = 0;
+      this.RestaurantList = null;
+
     this.getRestaurantList()
     }
   }
