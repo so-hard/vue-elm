@@ -11,10 +11,8 @@
             }"
       @change="seclctRes"
     >
-      <template slot-scope="{ node, data }" >
-        <section class="seclct-node"
-        @click="test(data)"
-        >
+      <template slot-scope="{ node, data }">
+        <section class="seclct-node" @click="test(data)">
           <div class="node-left">
             <img :src="getImgPath(data.image_url)" alt class="seclct-img">
             <span>{{ data.name }}</span>
@@ -23,15 +21,18 @@
         </section>
       </template>
     </el-cascader>
-    <el-cascader :options="sortArr"></el-cascader>
-    <el-cascader
-      :options="seclctArr"
-      :props="{
-            label: 'name',
-            value: 'name',
-            children: 'sub_categories'
-            }"
-    ></el-cascader>
+
+
+    <el-cascader 
+    :options="sortArr" 
+    @change="seclctSort">
+      <template slot-scope="{ node, data }">
+        <section >
+            <i :class='data.icon' :style='{color: data.color}'></i>
+            <span>{{ data.label }}</span>
+        </section>
+      </template>
+    </el-cascader>
   </section>
 </template>
 
@@ -45,31 +46,39 @@ export default {
       sortArr: [
         {
           value: "1",
-          label: "起送价"
+          label: "起送价",
+          icon: "el-icon-coin",
+          color: "yellow"
         },
         {
           value: "2",
-          label: "配送速度"
+          label: "配送速度",
+          icon: "el-icon-bicycle",
+          color: "#409EFF"
         },
         {
           value: "3",
-          label: "评分"
+          label: "评分",
+          icon: "el-icon-star-off",
+          color: "#409EFD"
         },
         {
           value: "4",
-          label: "智能排序(默认)"
+          label: "智能排序(默认)",
+          icon: "el-icon-sort",
+          color: "#409EFD"
         },
         {
           value: "5",
-          label: "距离最近"
+          label: "距离最近",
+          icon: "el-icon-sort-down",
+          color: "#409EFD"
         },
         {
           value: "6",
-          label: "距离最近"
-        },
-        {
-          value: "6",
-          label: "距离最近"
+          label: "销量最高",
+          icon: "el-icon-sort-up",
+          color: "#409EFD"
         }
       ]
     };
@@ -96,11 +105,14 @@ export default {
         suffix;
       return "https://fuss10.elemecdn.com" + url;
     },
-    seclctRes(value){
-        this.$store.commit('setRestaurantId', [value[1]])
+    seclctRes(value) {
+      this.$store.commit("setRestaurantId", [value[1]]);
+    },
+    seclctSort(value){
+        this.$store.commit("setOrderId",value[0])
     },
     test(data) {
-        console.log(data)
+      console.log(data);
     }
   },
   created() {
@@ -118,12 +130,17 @@ export default {
   align-items: center;
 }
 
-.seclct-node
-    display flex
-    height  100%
-    justify-content space-between
-    align-items center
-    img 
-        height 15px
+.seclct-node {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    height: 15px;
+  }
+}
+
+
 </style>
 

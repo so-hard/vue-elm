@@ -9,6 +9,9 @@ const state = {
 getters = {
   getRestaurantId: state => {
     return state.restaurant_category_id
+  },
+  gtOrderId: state =>{
+    return state.order_by
   }
 },
 

@@ -60,9 +60,9 @@ export default {
         offset: this.offset,
         limit: 20,
         restaurant_category_id: [],
-        order_by: null,
+        order_by: this.$store.getters.gtOrderId,
         delivery_mode: null,
-        support_ids: [],
+        support_ids:null,
         restaurant_category_ids: this.$store.getters.getRestaurantId
       };
     },
@@ -99,6 +99,12 @@ export default {
   },
   watch:{
     "$store.state.shop.restaurant_category_id":function () {
+      this.loadingConr = true
+      this.offset = 0
+      this.RestaurantList = null
+      this.getRestaurantList()
+    },
+    "$store.state.shop.order_by":function () {
       this.loadingConr = true
       this.offset = 0
       this.RestaurantList = null
