@@ -12,7 +12,8 @@ import {
     Input,
     Loading,
     Tag,
-    Cascader
+    Cascader,
+    Progress
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -29,6 +30,7 @@ Vue.use(Input)
 Vue.use(Loading)
 Vue.use(Tag)
 Vue.use(Cascader)
+Vue.use(Progress)
 
 
 

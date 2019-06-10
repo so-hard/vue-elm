@@ -1,5 +1,4 @@
 const state = {
-  
     restaurant_category_id: [],
     order_by: null,
     delivery_mode: null,

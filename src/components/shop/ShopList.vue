@@ -95,7 +95,7 @@ export default {
 
      .list-second, .list-third, .list-fourth {
        height: (25 / 5)vw;
-       font-size: 1vw;
+       font-size: 3.5vw;
        margin: 1vw 0;
        color: #9e9e9e;
        width: 100%;

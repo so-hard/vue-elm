@@ -3,7 +3,6 @@
         <CommentHeader
         headerText="搜索"
         />
-
         search
         <FootGuide />
     </div>

@@ -2,7 +2,7 @@
   <section>
     <CommentHeader
       :headerText="text"    
-     />  
+     /> 
      <ShopMain />
   </section>
 </template>
@@ -10,14 +10,18 @@
 <script>
 import CommentHeader  from "../../src/components/CommentHeader"
 import ShopMain from "../components/shop/ShopMain"
-
 export default {
   name: "shop",
   components: {
     CommentHeader,
     ShopMain,
   },
+
+  // beforeDestroy(){
+  //   this.isLoading = false
+  // },
   props: ['text'],
+
 }
 </script>
 

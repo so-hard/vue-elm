@@ -1,5 +1,6 @@
 <template>
   <section class="shop-main" v-scroll="{hey,offset}">
+    <Loading  v-show="loadingConr"/>
     <ShopSeclct />
     <ShopList v-for="list in RestaurantList" :key="list.id" :list="list"/>
   </section>
@@ -8,6 +9,7 @@
 <script>
 import ShopList from './ShopList';
 import ShopSeclct from './ShopSeclct'
+import Loading from '../Loading'
 
 import { getShoppingRestaurants } from "../../serve/getData";
 
@@ -15,7 +17,8 @@ export default {
   name: "ShopMain",
   components: {
     ShopList,
-    ShopSeclct
+    ShopSeclct,
+    Loading
   },
   props: ["text"],
   data() {
@@ -23,7 +26,7 @@ export default {
       curAddress: null,
       RestaurantList: null,
       offset: 0,
-      loadingConr: false,
+      loadingConr: true,
       rate: ""
     };
   },
@@ -48,12 +51,14 @@ export default {
         window.scrollY + document.documentElement.clientHeight ==
         document.documentElement.scrollHeight
       ) {
-        this.loadingConr = true;
         this.offset += 20;
         this.getRestaurantList();
       }
     },
     getRestaurantList() {
+      this.loadingConr = true;
+      this.offset = 0;
+      this.RestaurantList = null;
       getShoppingRestaurants(this.getShopPara).then(res => {
         if (this.RestaurantList == null) {
           this.RestaurantList = res.data;
@@ -66,23 +71,16 @@ export default {
       });
     }
   },
-  mounted() {
-    this.loadingConr = true;
+  created() {
     this.curAddress = this.$store.getters.curAddress;
     this.getRestaurantList();
   },
   watch: {
-    "$store.state.shop.restaurant_category_id": function() {
-      this.loadingConr = true;
-      this.offset = 0;
-      this.RestaurantList = null;
-      this.getRestaurantList();
+    "$store.state.shop.restaurant_category_id":function(){
+    this.getRestaurantList()
     },
-    "$store.state.shop.order_by": function() {
-      this.loadingConr = true;
-      this.offset = 0;
-      this.RestaurantList = null;
-      this.getRestaurantList();
+    "$store.state.shop.order_by":function(){
+    this.getRestaurantList()
     }
   }
 };
