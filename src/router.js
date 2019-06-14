@@ -64,8 +64,21 @@ export default new Router({
     {
       path: '/shop:text',
       name: 'shop',
-      component: () => import('./views/shop.vue'),
+      component: () => import('./views/Shop.vue'),
       props: true 
-    }
+    },
+    {
+      path: '/shopdetail:id',
+      name: 'shopdetail',
+      component: () => import('./views/shop/ShopDetail.vue'),
+      props: true,
+      children: [
+        {
+          path: '/shopdetail/shopitem',
+          name : 'shopitem',
+          component: () => import('./components/shop/ShopItem.vue')
+        },
+      ]
+    },
   ]
 })

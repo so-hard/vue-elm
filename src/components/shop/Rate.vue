@@ -1,3 +1,8 @@
+ <!--  
+ on为上层有填充的组建，
+ 通过传过来的propos来控制on的宽带
+ -->
+
 <template>
   <section class="rate"
   >
@@ -27,9 +32,7 @@ export default {
   props:['rate'],
   computed: {
     returnRate() {
-
       return `${this.rate/5*100}%`
-
     }
   }
 };

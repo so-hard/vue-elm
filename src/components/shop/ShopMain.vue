@@ -75,15 +75,14 @@ export default {
   },
   watch: {
     "$store.state.shop.restaurant_category_id":function(){
+        //清空data数据以及offset
       this.offset = 0;
       this.RestaurantList = null;
-
     this.getRestaurantList()
     },
     "$store.state.shop.order_by":function(){
       this.offset = 0;
       this.RestaurantList = null;
-
     this.getRestaurantList()
     }
   }

@@ -51,7 +51,7 @@ export const getFoodType = () => Axios.get(
 )
 
 
-
+//餐馆列表
 export const getShoppingRestaurants = ({
     latitude,
     longitude,
@@ -78,6 +78,16 @@ export const getShoppingRestaurants = ({
     }
 )
 
+//餐馆种类
 export const getResCategory= () => Axios.get(
     'shopping/v2/restaurant/category'
 )
+
+//餐馆详情
+export const getRestaurantDetail = (id) => Axios.get(
+    `/shopping/restaurant/${id}`
+)
+
+//食品种类
+
+// export = const get

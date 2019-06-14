@@ -10,13 +10,9 @@ import './plugins/element.js'
 Vue.config.productionTip = false
 Vue.directive('scroll', {
   inserted: function (el, binding) {
-    // console.log(binding.value)
-    // let debounceTimeout = null
-
     //节流
     let Timeout;
     let f = function () {
-      // console.log(111)
       binding.value.hey(el, binding.value.val)
       Timeout = null
     }

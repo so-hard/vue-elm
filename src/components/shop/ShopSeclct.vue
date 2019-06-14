@@ -128,6 +128,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .el-cascader{
+    width 50vw
+  }
 }
 
 .seclct-node {

@@ -1,5 +1,5 @@
 <template>
-  <section class="shop-list">
+  <section class="shop-list" @click="go(list.id)">
     <div class="list-left">
       <img :src="baseImg + list.image_path" alt>
     </div>
@@ -40,7 +40,17 @@ export default {
       baseImg: "//elm.cangdu.org/img/"
     };
   },
-  props: ["list"]
+  props: ["list"],
+  methods: {
+    go(id) {
+      this.$router.push({
+        name: 'shopdetail',
+        params: {
+          id
+        }
+      })
+    }
+  }
 };
 </script>
 
