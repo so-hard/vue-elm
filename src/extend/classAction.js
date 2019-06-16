@@ -1,15 +1,17 @@
 
-
+// 拼接class字符串
 export function setClass(node,className) {
+    let oriClass = node.getAttribute("class") ? `${node.getAttribute("class")} ${className}`: className;
     node.setAttribute(
         'class',
-        className
+        oriClass
       )
 }
 
 export function removeClass(node, className){
-    if (node.getAttribute("class") == className) {
-        node.removeAttribute("class")
+    let oriClass = node.getAttribute("class");
+    if ( oriClass != null ) {
+        node.setAttribute("class", oriClass.replace(className,''))
     }
 }
 
