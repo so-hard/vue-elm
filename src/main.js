@@ -12,15 +12,20 @@ Vue.directive('scroll', {
   inserted: function (el, binding) {
     //节流
     let Timeout;
+    let time = 800
+    console.log(binding.value.time)
+
+    if(binding.value.time != null) {
+      time = binding.value.time
+    }
     let f = function () {
       binding.value.hey(el, binding.value.val)
       Timeout = null
     }
     const onScoll = () => {
       if (!Timeout)
-        Timeout = setTimeout(f, 800)
+        Timeout = setTimeout(f, time)
     }
-
     el._onScroll = onScoll
     window.addEventListener('scroll', onScoll)
   },
