@@ -9,17 +9,16 @@
         <p>{{`评价${headerDate.rating} 月售${headerDate.recent_order_num}`}}</p>
         <p> <span v-for="list in headerDate.supports" :key="list.id">{{list.icon_name}}</span></p>
         <p style="font-size:2vw">{{`公告： ${headerDate.promotion_info}`}}</p>
-      </section>
-      <section >
-        <el-menu mode="horizontal" default-active="1">
-          <el-menu-item index="1">点餐</el-menu-item>
-          <el-menu-item index="2">评价</el-menu-item>
-          <el-menu-item index="3">商家</el-menu-item>
-        </el-menu>
-      </section>
-      
+        </section>
     </header>
-    <section class="">
+
+
+    <section class="detail-main"  >
+        <el-menu default-active="shopitem" v-scroll={hey,time:0}	:router="true" mode="horizontal">
+          <el-menu-item index="shopitem">点餐</el-menu-item>
+          <el-menu-item index="comment">评价</el-menu-item>
+          <el-menu-item index="owner">商家</el-menu-item>
+      </el-menu>
       <router-view ></router-view>
     </section>
   </section>
@@ -27,12 +26,15 @@
 
 <script>
 import {getRestaurantDetail} from  '../../serve/getData'
+import {setClass,removeClass} from '../../extend/classAction.js'
+
 export default {
   name: 'shopdetail',
   data() {
     return{
       headerDate: {},
-      baseImg: "//elm.cangdu.org/img/"
+      baseImg: "//elm.cangdu.org/img/",
+      
     }
   },
   computed:{
@@ -42,8 +44,30 @@ export default {
       } 
     }
   },
+  methods: {
+    checkId() {
+      // console.log() 
+      if( isNaN(this.id)) {
+        this.$router.push('/msite')
+      }else{
+        this.$store.commit('setResId',this.id)
+      }
+    },
+    hey(el){
+      // console.log(window.scrollY)
+        if(window.scrollY >= 290){
+          setClass(el,"fixed")
+        }else{
+          removeClass(el,"fixed")
+        }
+
+    }
+  },
   props: ['id'],
-  created() {
+  created(){
+    this.checkId()
+  },
+  mounted() {
     getRestaurantDetail(this.id).then((res) => {
       this.headerDate = res.data
     })
@@ -52,8 +76,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+ @import '../../assets/css/mix';
+
+
+
 header 
 .shop-detail
+  // position relative
   border-bottom 1px 
   background #fff
   .header-top
@@ -87,8 +116,16 @@ header
         padding: 1vw;
         margin: 1vw;
         border: 1px solid #dcdfe6;
+.detail-main
+  position relative
+  width 100vw
+  // overflow hidden
+  height 110vh
   .el-menu
+    width 100vw
     display flex
     justify-content center
+    .el-menu-item
+      height 15vw
 </style>
 

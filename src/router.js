@@ -62,19 +62,20 @@ export default new Router({
       
     },
     {
-      path: '/shop:text',
+      path: '/shop/:text',
       name: 'shop',
       component: () => import('./views/Shop.vue'),
       props: true 
     },
     {
-      path: '/shopdetail:id',
+      path: '/shopdetail/:id',
       name: 'shopdetail',
       component: () => import('./views/shop/ShopDetail.vue'),
       props: true,
+      redirect: '/shopdetail/:id/shopitem',
       children: [
         {
-          path: '/shopdetail/shopitem',
+          path: 'shopitem',
           name : 'shopitem',
           component: () => import('./components/shop/ShopItem.vue')
         },

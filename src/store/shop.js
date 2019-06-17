@@ -3,7 +3,8 @@ const state = {
     order_by: null,
     delivery_mode: null,
     support_ids: null,
-    restaurant_category_ids: null
+    restaurant_category_ids: null,
+    resId: null
 },
 getters = {
   getRestaurantId: state => {
@@ -11,6 +12,9 @@ getters = {
   },
   gtOrderId: state =>{
     return state.order_by
+  },
+  getResId: state => {
+    return state.resId
   }
 },
 
@@ -26,6 +30,9 @@ getters = {
     },
     setDeliveryId(state, id) {
       state.delivery_mode = id
+    },
+    setResId(state,id) {
+      state.resId = id
     }
   };
 
@@ -33,5 +40,5 @@ getters = {
 export default {
   state,
   getters,
-  mutations
+  mutations,
 }

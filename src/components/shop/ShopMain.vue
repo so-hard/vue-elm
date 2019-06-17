@@ -1,5 +1,5 @@
 <template>
-  <section class="shop-main" v-scroll="{hey,offset}">
+  <section class="shop-main" v-scroll="{hey}">
     <Loading  v-show="loadingConr"/>
     <ShopSeclct />
     <ShopList v-for="list in RestaurantList" :key="list.id" :list="list"/>
