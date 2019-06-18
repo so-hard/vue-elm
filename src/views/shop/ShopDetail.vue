@@ -54,13 +54,12 @@ export default {
       }
     },
     hey(el){
-      // console.log(window.scrollY)
-        if(window.scrollY >= 290){
+      console.log(window.scrollY)
+        if(window.scrollY >= 375){
           setClass(el,"fixed")
         }else{
           removeClass(el,"fixed")
         }
-
     }
   },
   props: ['id'],
@@ -119,9 +118,11 @@ header
 .detail-main
   position relative
   width 100vw
-  // overflow hidden
-  height 110vh
+  height 100vh
+  // overflow scroll
   .el-menu
+    background #fff
+    z-index 99
     width 100vw
     display flex
     justify-content center
