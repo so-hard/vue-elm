@@ -80,7 +80,7 @@ export default {
       //判断被浏览器卷走的高度
       // console.log(arguments)
        if( window.scrollY >= val.off && window.scrollY < val.off+ val.hight-10){
-        // console.log("skr")
+        console.log(el)
         setClass(el,'skr')
       }else{
         removeClass(el,'skr')
@@ -117,8 +117,9 @@ export default {
    await getCity('group').then(res => {
       this.allCity = res.data;
       this.$nextTick(() => {
+        // 当视图更新后拿到cityHead的dom
         let cityHead = this.$refs.cityHead;
-        console.log(cityHead)
+        // console.log(cityHead)
         this.headTop = cityHead.map(val => {
                 return {
                   /*

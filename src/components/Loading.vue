@@ -19,12 +19,15 @@ export default {
 .Loading {
   top 0
   position fixed
+  z-index 9999
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   display flex
   justify-content center
   align-items center
+  // background #fff
+  // filter: blur(10px);
 }
 
 div {

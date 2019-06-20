@@ -54,7 +54,7 @@ export default {
       }
     },
     hey(el){
-      console.log(window.scrollY)
+      // console.log(window.scrollY)
         if(window.scrollY >= 375){
           setClass(el,"fixed")
         }else{

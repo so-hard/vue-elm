@@ -1,17 +1,28 @@
 <template>
-  <section class="shop-item" v-scroll={hey}>
+  <section class="shop-item" >
+    <Loading 
+      v-if="show"
+    />
     <section class="left">
       <ul>
         <li class="left-tag" 
         v-for="(item, index) in itemName"
-        :key="index">
+        :key="index"
+        ref="leftTag"
+        :class="index == 0 ? 'active' : ''"
+        @click="locatTag(index)"
+        >
           {{item}}
         </li>
       </ul>
     </section>
-    <section class="right">
+    <section class="right"
+    ref="items"
+    v-scroll.cur={hey} 
+    >
       <section class="item"  v-for="lists in item"
       :key=lists.id
+            
       >
         <div class="title">
           <span>{{lists.name}}</span>
@@ -49,32 +60,42 @@
 
 <script>
 import {getShiopItem} from '../../serve/getData'
+import {removeClass,setClass} from '../../extend/classAction'
 
+import Loading from '../Loading'
 
 export default {
+  components: {
+    Loading
+  },
   name: 'shopitem',
   data() {
     return {
       baseImg: "//elm.cangdu.org/img/",
       resId: null,
       item: null,
-      itemName: null
+      itemName: null,
+      show: true,
+      itemsHeight: []
     }
   },
   methods: {
-    // hey(el){
-    //   if(this.scrollY > 290){
-    //     el
-    //   }
-    // },
     hey(el){
-      console.log(el)
+      this.itemsHeight.forEach(
+        (val)=>{
+          if( el.scrollTop >= val.off && el.scrollTop < val.off+ val.hight-10){
+        // console.log(el.scrollTop,val.off)
+        setClass(val.tagDom,'active')
+      }else{
+        removeClass(val.tagDom,'active')
+      }
+        }
+      )
     },
     getResId() {
       return new Promise(
         ()=> {
           this.id = this.$store.state.shop.resId
-          console.log(this.id)
         })
     },
 
@@ -84,6 +105,9 @@ export default {
           return val.name;
         }
       )
+    },
+    locatTag(index){
+      this.$refs.items.scrollTop = this.itemsHeight[index].off
     }
   },
   computed: {
@@ -95,10 +119,28 @@ export default {
         (res)=>{
          this.item = res.data;
          this.getItemHead(res.data)
+         this.$nextTick(() =>{
+          let itemsHeight = [... this.$refs.items.childNodes] 
+          // console.log(itemsHeight)
+          let leftTags = this.$refs.leftTag;
+           this.itemsHeight = itemsHeight.map(
+            (val, index)=> {
+              return {
+                tagDom: leftTags[index],
+                off: Math.round(val.offsetTop),
+                hight: val.clientHeight,
+                classSkr: ''
+              }
+            }
+          )
+         })
+         this.show = false
         }
       )
     )
   }
+
+
 }
 </script>
 
@@ -116,11 +158,11 @@ export default {
       flex-direction column
       fontOver()
       overflow-y hidden
+      background #eeeeee
       ul
         width 32vw
         overflow-y scroll
         overflow-x hidden
-        background #eeeeee
         li
           width 30vw
           fontOver()
@@ -129,6 +171,7 @@ export default {
       width 70vw
       position relative
       overflow-y scroll
+      scroll-behavior: smooth
       .item
         fontOver()
         text-align left 
@@ -139,7 +182,7 @@ export default {
         flex-direction column
         align-items flex-start
         // width 70.vw
-        margin  1vw
+        padding  1vw
         .item-food
           padding 1vw 0
           display flex

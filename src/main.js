@@ -13,8 +13,6 @@ Vue.directive('scroll', {
     //节流
     let Timeout;
     let time = 800
-    // console.log(binding.value.time)
-    // 判断是否传入时间参数
     if(binding.value.time != null) {
       time = binding.value.time
     }  
@@ -26,12 +24,22 @@ Vue.directive('scroll', {
           Timeout = null
         }, time)
     }
+    console.log(binding.arg)
     el._onScroll = onScoll
-    window.addEventListener('scroll', onScoll)
+    if(binding.modifiers.cur){
+      el.addEventListener('scroll',onScoll)
+      binding.cur = 1
+    }else{
+      window.addEventListener('scroll', onScoll)
+    }
   },
 
   unbind: function(el) {
-    window.removeEventListener('scroll',el._onScroll);
+    if(el.cur){
+      el.removeEventListener('scroll',el._onScroll);
+    }else{
+      window.removeEventListener('scroll',el._onScroll);
+    }
   }
 })
 new Vue({
