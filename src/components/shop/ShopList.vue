@@ -10,7 +10,7 @@
       <div class="list-second">
         <div class="second-left">
           <Rate :rate="list.rating"/>
-          {{list.rating}}月售{{list.recent_order_num}}单
+          月售{{list.recent_order_num}}单
         </div>
         <div
           class="feng-bird"

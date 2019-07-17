@@ -14,7 +14,7 @@
 
 
     <section class="detail-main"  >
-        <el-menu default-active="shopitem" v-scroll={hey,time:0}	:router="true" mode="horizontal">
+      <el-menu default-active="shopitem" v-scroll={hey,time:0}	:router="true" mode="horizontal">
           <el-menu-item index="shopitem">点餐</el-menu-item>
           <el-menu-item index="comment">评价</el-menu-item>
           <el-menu-item index="owner">商家</el-menu-item>

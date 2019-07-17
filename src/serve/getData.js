@@ -88,8 +88,7 @@ export const getRestaurantDetail = (id) => Axios.get(
     `/shopping/restaurant/${id}`
 )
 
-//食品种类
-
+//店铺商品
 export  const getShiopItem = (restaurant_id) => Axios.get(
     '/shopping/v2/menu',{
         params: {

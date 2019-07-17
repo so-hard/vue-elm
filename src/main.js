@@ -5,8 +5,6 @@ import store from './store'
 import './plugins/element.js'
 
 
-
-
 Vue.config.productionTip = false
 Vue.directive('scroll', {
   inserted: function (el, binding) {
@@ -24,7 +22,7 @@ Vue.directive('scroll', {
           Timeout = null
         }, time)
     }
-    console.log(binding.arg)
+    // console.log(binding.arg)
     el._onScroll = onScoll
     if(binding.modifiers.cur){
       el.addEventListener('scroll',onScoll)

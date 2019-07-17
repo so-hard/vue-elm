@@ -30,9 +30,7 @@ export default {
     ...mapState({
         userInfo:state => state.user.userInfo,
     })
-
   },
-
 
   created() {
     let userinfo = getStore("userinfo")

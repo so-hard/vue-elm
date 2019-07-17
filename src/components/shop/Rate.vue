@@ -6,7 +6,8 @@
 <template>
   <section class="rate"
   >
-    <section class="on"
+    <section style="display: flex">
+      <section class="on"
       :style="{width: returnRate}"
     >
       <i class="el-icon-star-on"></i>
@@ -23,6 +24,9 @@
       <i class="el-icon-star-off"></i>
       <i class="el-icon-star-off"></i>
     </section>
+    </section>
+    
+    {{rate}}
   </section>
 </template>
 
