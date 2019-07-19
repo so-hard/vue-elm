@@ -48,7 +48,7 @@ export default {
   methods: {
     hey() {
       if (
-        window.scrollY + document.documentElement.clientHeight ==
+        window.scrollY + 10 + document.documentElement.clientHeight >=
         document.documentElement.scrollHeight
       ) {
         this.offset += 20;
