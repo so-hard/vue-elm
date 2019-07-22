@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <section class="search">
         <CommentHeader
         headerText="搜索"
         />
-        search
+        <section>
+
+        </section>
         <FootGuide />
-    </div>
+    </section>
 </template>
 
 <script>
@@ -22,5 +24,6 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-
+.search
+    height 100vh
 </style>

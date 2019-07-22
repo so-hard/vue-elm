@@ -31,7 +31,7 @@ export default {
 
 <style lang="stylus" scoped>
 .shop-main
-  margin-top 15vw
+  margin-bottom 15vw
 
 </style>
 

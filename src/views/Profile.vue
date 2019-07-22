@@ -136,8 +136,6 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.profile-header
-        margin-top 15vw
 .profile-cards
     display flex
     margin 2vw 0

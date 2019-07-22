@@ -53,18 +53,18 @@ export default {
         this.$store.commit('setResId',this.id)
       }
     },
-    hey(el){
+    hey(){
       console.log(window.scrollY)
-        if(window.scrollY >= 277){
-          setClass(el,"fixed")
+        if(window.scrollY >= 270){
+          // setClass(el,"fixed")
           if(this.$store.state.shop.is_scoll != 'scroll') {
               this.$store.commit('setScroll','scroll')
           }
-        }else if(window.scrollY < 269){
+        }else if(window.scrollY < 90){
           if(this.$store.state.shop.is_scoll != 'visible') {
               this.$store.commit('setScroll', 'visible')
           }
-          removeClass(el,"fixed")
+          // removeClass(el,"fixed")
         }
     }
   },
@@ -141,6 +141,7 @@ header
     width 100vw
     display flex
     justify-content center
+    position sticky
     .el-menu-item
       height 15vw
 </style>

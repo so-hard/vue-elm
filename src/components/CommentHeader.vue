@@ -61,7 +61,7 @@ export default {
 <style lang="stylus" scoped>
 .comment-header
     z-index 99
-    position fixed;
+    position sticky;
     top 0;
     width 100%
     color #fff

@@ -99,7 +99,6 @@ export default {
   padding: 1vw;
   width: 95%;
   display: flex;
-  margin: 15vw auto 0 auto;
 
   .el-button {
     text-overflow: ellipsis;

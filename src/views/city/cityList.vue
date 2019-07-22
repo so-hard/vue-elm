@@ -150,7 +150,7 @@ box-show() {
 
 .hot-city {
   box-show();
-  margin-top: 15vw;
+  // margin-top: 15vw;
   padding: 10px;
 
   .el-tag {

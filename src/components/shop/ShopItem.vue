@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { getShiopItem } from "../../serve/getData";
 import { removeClass, setClass } from "../../extend/classAction";
 import Rate from "./Rate";
 import Loading from "./../Loading";

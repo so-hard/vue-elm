@@ -85,7 +85,7 @@ export default {
 
 <style lang='stylus' scoped>
 .el-carousel 
-  margin: 16vw 0 0 0;
+  // margin: 16vw 0 0 0;
   background #fff
 
   .el-carousel__item 

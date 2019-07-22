@@ -184,7 +184,7 @@ export default {
       margin: 15px 0 10px 0;
 
       .el-button {
-        margin-right: 15px;
+        // margin-right: 15px;
         width: 80px;
       }
 

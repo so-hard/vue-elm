@@ -64,9 +64,11 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.un-login
-  margin-bottom: 25vw
+.order
+  height 100vh
+// .un-login
+//   margin-bottom: 25vw
 
-.order-ul
-  margin-bottom: 25vw
+// .order-ul
+//   margin-bottom: 25vw
 </style>
