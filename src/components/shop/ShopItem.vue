@@ -1,12 +1,16 @@
 <template>
   <section class="shop-item">
     <Loading v-if="show" />
+    <!-- 顶部随机推荐 -->
+    <!-- <section>
+            
+    </section>-->
     <!-- 左侧导航 -->
     <section class="left">
       <ul>
         <li
           class="left-tag"
-          v-for="(item, index) in itemName"
+          v-for="(item, index) in itemNames"
           :key="index"
           ref="leftTag"
           :class="index == 0 ? 'active' : ''"
@@ -22,7 +26,7 @@
           <span class="description">{{lists.description}}</span>
         </div>
         <section class="item-food" v-for="list in lists.foods" :key="list.item_id">
-          <el-image  :src="baseImg+list.image_path"  fit="contain" lazy></el-image>
+          <el-image :src="baseImg+list.image_path" fit="contain" lazy></el-image>
           <section class="item-description item-size">
             <section class="item-top">
               <h5 class="item-head">{{list.name}}</h5>
@@ -33,7 +37,7 @@
             <section class="item-bottom">
               <div class="item-fooder">
                 <span style="color: red">{{list.specfoods[0].price}}￥起送</span>
-                <div class="item-control" >
+                <div class="item-control">
                   <NumControl />
                 </div>
               </div>
@@ -48,8 +52,8 @@
 <script>
 import { getShiopItem } from "../../serve/getData";
 import { removeClass, setClass } from "../../extend/classAction";
-import Rate from "./Rate"
-import Loading from "../Loading";
+import Rate from "./Rate";
+import Loading from "./../Loading";
 import NumControl from "./NumControl";
 
 export default {
@@ -64,7 +68,7 @@ export default {
       baseImg: "//elm.cangdu.org/img/",
       resId: null,
       item: null,
-      itemName: null,
+      itemNames: null,
       show: true,
       itemsHeight: []
     };
@@ -83,12 +87,6 @@ export default {
         }
       });
     },
-    getResId() {
-      return new Promise(() => {
-        //获取店铺id
-        this.id = this.$store.state.shop.resId;
-      });
-    },
 
     getItemHead(data) {
       //侧导航
@@ -96,31 +94,41 @@ export default {
         return val.name;
       });
     },
+
     locatTag(index) {
       this.$refs.items.scrollTop = this.itemsHeight[index].off;
+    },
+
+    getItemHeight() {
+      return [...this.$refs.items.childNodes].map(
+            (val, index) => {
+              return {
+                tagDom: this.$refs.leftTag[index],
+                off: Math.round(val.offsetTop),
+                hight: val.clientHeight,
+              };
+            }
+          );
     }
   },
   computed: {},
-  created() {
-    this.getResId().then(
-      //从后台获取店铺商品
-      getShiopItem(this.id).then(res => {
-        this.item = res.data;
-        this.getItemHead(res.data);
-        //视图更新获取右侧店铺的高度
-        this.$nextTick(() => {
-          this.itemsHeight = [...this.$refs.items.childNodes].map((val, index) => {
-            return {
-              tagDom: this.$refs.leftTag[index],
-              off: Math.round(val.offsetTop),
-              hight: val.clientHeight,
-              classSkr: ""
-            };
-          });
-        });
-        this.show = false;
+  mounted() {
+    //分发action
+    this.$store
+      .dispatch("fetchShopItems")
+      .then(() => {
+        //给组件赋值
+        this.item = this.$store.state.shop.restaurant_items;
+        this.itemNames = this.$store.getters.getItemsHeader;
       })
-    );
+      .then(() => {
+        // 获取组件高度
+          this.itemsHeight = this.getItemHeight()
+      })
+      .then(()=> {
+        this.show = false
+      });
+
   }
 };
 </script>
@@ -182,8 +190,8 @@ export default {
         overflow: hidden;
 
         .el-image {
-          width 24vw
-          height 18vw
+          width: 24vw;
+          height: 18vw;
           padding: 1vw;
           margin: 1vw;
           border: 0.5vw #eeeeee solid;
@@ -212,7 +220,7 @@ export default {
             }
 
             .rate {
-              width 25vw
+              width: 25vw;
             }
           }
 

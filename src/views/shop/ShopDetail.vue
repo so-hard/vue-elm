@@ -55,7 +55,8 @@ export default {
     },
     hey(el){
       // console.log(window.scrollY)
-        if(window.scrollY >= 375){
+        if(window.scrollY >= 276){
+          // console.log(111)
           setClass(el,"fixed")
         }else{
           removeClass(el,"fixed")
@@ -67,8 +68,14 @@ export default {
     this.checkId()
   },
   mounted() {
-    getRestaurantDetail(this.id).then((res) => {
-      this.headerDate = res.data
+    // getRestaurantDetail(this.id).then((res) => {
+    //   this.headerDate = res.data
+    // })
+    this.$store.dispatch('fetchRestaurantDetail',{
+      id: this.id
+    }).then( ()=> {
+      console.log(this.$store.state.shop.header)
+      this.headerDate = this.$store.state.shop.restaurant_detail
     })
   }
 }
