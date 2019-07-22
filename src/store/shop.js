@@ -7,7 +7,8 @@ const state = {
     support_ids: null, //服务支持
     resId: null,
     restaurant_detail: null,
-    restaurant_items: null
+    restaurant_items: null,
+    is_scoll: null
   },
   getters = {
     getRestaurantId: state => {
@@ -19,9 +20,6 @@ const state = {
     getResId: state => {
       return state.resId
     },
-    // getHotItems: state => {
-    //   state.restaurant_detail
-    // },
     getItemsHeader: state => {
       console.log(typeof state.restaurant_items)
       if(state.restaurant_items != null){
@@ -61,6 +59,9 @@ const state = {
     setRestaurantItems(state,payload){
       state.restaurant_items = payload.data
     },
+    setScroll(state,val){
+      state.is_scoll = val
+    }
   },
 
 

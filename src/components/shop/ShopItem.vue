@@ -19,7 +19,9 @@
       </ul>
     </section>
     <!-- 右侧菜品 -->
-    <section class="right" ref="items" v-scroll.cur="{hey}">
+    <section class="right" ref="items" v-scroll.cur="{hey}" :style="{
+      overflowY: scroll
+    }">
       <section class="item" v-for="lists in item" :key="lists.id">
         <div class="title">
           <span>{{lists.name}}</span>
@@ -70,7 +72,8 @@ export default {
       item: null,
       itemNames: null,
       show: true,
-      itemsHeight: []
+      itemsHeight: [],
+      scroll: 'visible'
     };
   },
   methods: {
@@ -124,11 +127,14 @@ export default {
       .then(() => {
         // 获取组件高度
           this.itemsHeight = this.getItemHeight()
+          this.show = false
       })
-      .then(()=> {
-        this.show = false
-      });
-
+  },
+  watch: {
+    '$store.state.shop.is_scoll': function() {
+      console.log(111)
+      this.scroll = this.$store.state.shop.is_scoll
+    }
   }
 };
 </script>
@@ -166,7 +172,7 @@ export default {
   .right {
     width: 70vw;
     position: relative;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     scroll-behavior: smooth;
 
     .item {

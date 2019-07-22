@@ -54,11 +54,16 @@ export default {
       }
     },
     hey(el){
-      // console.log(window.scrollY)
-        if(window.scrollY >= 276){
-          // console.log(111)
+      console.log(window.scrollY)
+        if(window.scrollY >= 277){
           setClass(el,"fixed")
-        }else{
+          if(this.$store.state.shop.is_scoll != 'scroll') {
+              this.$store.commit('setScroll','scroll')
+          }
+        }else if(window.scrollY < 269){
+          if(this.$store.state.shop.is_scoll != 'visible') {
+              this.$store.commit('setScroll', 'visible')
+          }
           removeClass(el,"fixed")
         }
     }
@@ -74,9 +79,12 @@ export default {
     this.$store.dispatch('fetchRestaurantDetail',{
       id: this.id
     }).then( ()=> {
-      console.log(this.$store.state.shop.header)
+      // console.log(this.$store.state.shop.header)
       this.headerDate = this.$store.state.shop.restaurant_detail
     })
+  },
+  watch: {
+    
   }
 }
 </script>
