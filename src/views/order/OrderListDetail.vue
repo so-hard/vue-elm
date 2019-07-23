@@ -152,7 +152,7 @@ detail-comment-style()
     align-items center
 
 .order-list-detail 
-  margin: 15vw 0 0 0;
+  // margin: 15vw 0 0 0;
   position: absolute;
   top: 0;
   left: 0;

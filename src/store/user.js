@@ -1,4 +1,5 @@
-import {setStore} from '../extend/storage'
+import {setStore} from './../extend/storage'
+import {login} from './../serve/getData'
 // import { string } from 'postcss-selector-parser';
 // import { type } from 'os';
 // import Axios from '../extend/axios'
@@ -33,13 +34,24 @@ const mutations = {
 }
 
 
-const action = {
-    // getUserInfo()
-
+const actions = {
+    fetchLogin({
+        commit
+    }, Payload) {
+        // console.log(Payload)
+        return login(Payload).then(
+            res => {
+                if (res.data.status != 0)
+                    commit('setUserInfo', res.data)
+                return res
+            }
+        )
+    }
 }
+
 export default {
     state,
     mutations,
     getters,
-    action
+    actions
 }

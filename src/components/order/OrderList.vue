@@ -31,11 +31,13 @@ export default {
   props:['listData'],
   methods: {
     goto(orderNum){
-      console.log(111)
+      // console.log(111)
+      this.$emit('changeOrderHeadText', '订单详情')
       this.$router.push({
         path:`order/detail/${orderNum}`
       })
-    }
+    },
+
   }
 
 };

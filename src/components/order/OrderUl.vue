@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.order-ul
-  margin 15vw 0 0 0
+
 </style>
 

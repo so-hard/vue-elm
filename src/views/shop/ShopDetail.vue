@@ -55,17 +55,12 @@ export default {
     },
     hey(){
       console.log(window.scrollY)
-        if(window.scrollY >= 270){
+        if(window.scrollY >= 220){
           // setClass(el,"fixed")
           if(this.$store.state.shop.is_scoll != 'scroll') {
               this.$store.commit('setScroll','scroll')
           }
-        }else if(window.scrollY < 90){
-          if(this.$store.state.shop.is_scoll != 'visible') {
-              this.$store.commit('setScroll', 'visible')
-          }
-          // removeClass(el,"fixed")
-        }
+        }        
     }
   },
   props: ['id'],

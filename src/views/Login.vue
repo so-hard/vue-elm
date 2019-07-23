@@ -31,7 +31,7 @@
           </el-input>
         </el-form-item>
         <p style="color:red">没有帐号默认注册</p>
-        <el-button type="success" @click="log('loginForm')">登录</el-button>
+        <el-button type="success" @click="login('loginForm')">登录</el-button>
         <!-- <el-button type="success" @click="signOut()">退出</el-button> -->
       </el-form>
     </div>
@@ -40,7 +40,7 @@
 
 <script>
 // import Axios from "../plugins/axios.js";
-import { login, getCaptchas, signOut } from "../serve/getData.js";
+import { getCaptchas, signOut } from "../serve/getData.js";
 import { mapMutations } from "vuex";
 // import { readlink } from 'fs';
 // axios.defaults.withCredentials = true
@@ -94,23 +94,18 @@ export default {
       signOut();
     },
     //登陆方法
-    log(formName) {
+    login(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          login(
-            this.loginForm.name,
-            this.loginForm.pas,
-            this.loginForm.mess
-          ).then(res => {
-            let data = res;
-            if (data.data.status == 0) {
-              return;
-            }
-            this.setUserInfo(data.data);
-            console.log(data.data);
-            this.$router.push("profile");
-            console.log(res);
-          });
+          this.$store
+            .dispatch("fetchLogin", {
+              username: this.loginForm.name,
+              password: this.loginForm.pas,
+              captcha_code: this.loginForm.mess
+            })
+            .then(res => {
+              if (res.data.status != 0) this.$router.push("/msite");
+            });
         }
       });
     },
@@ -162,14 +157,14 @@ export default {
 
 <style scoped lang="stylus"  >
 .login {
-  font-size 16px;
+  font-size: 16px;
   margin: 20vh auto;
   width: 328px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding 20px 3vw
-  background #fff
+  padding: 20px 3vw;
+  background: #fff;
 
   .login-img {
     margin-bottom: 10px;
@@ -188,7 +183,7 @@ export default {
         width: 80px;
       }
 
-      .el-button--text{
+      .el-button--text {
         // font-size 16px;
       }
     }

@@ -1,7 +1,8 @@
-import Axios from '../extend/axios'
+import Axios from './../extend/axios'
 
 
-export const login = (username, password, captcha_code) => Axios.post(
+export const login = ({username, password, captcha_code}) => 
+     Axios.post(
     'v2/login',
     {
         username,
@@ -10,6 +11,7 @@ export const login = (username, password, captcha_code) => Axios.post(
     }
 )
 
+    
 
 export const getCaptchas = () => Axios.post('v1/captchas');
 
