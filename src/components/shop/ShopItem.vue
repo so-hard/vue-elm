@@ -19,9 +19,14 @@
       </ul>
     </section>
     <!-- 右侧菜品 -->
-    <section class="right" ref="items" v-scroll.cur="{hey}" :style="{
+    <section
+      class="right"
+      ref="items"
+      v-scroll.cur="{hey}"
+      :style="{
       overflowY: scroll
-    }">
+    }"
+    >
       <section class="item" v-for="lists in item" :key="lists.id">
         <div class="title">
           <span>{{lists.name}}</span>
@@ -72,7 +77,7 @@ export default {
       itemNames: null,
       show: true,
       itemsHeight: [],
-      scroll: 'visible'
+      scroll: "hidden"
     };
   },
   methods: {
@@ -102,37 +107,35 @@ export default {
     },
 
     getItemHeight() {
-      return [...this.$refs.items.childNodes].map(
-            (val, index) => {
-              return {
-                tagDom: this.$refs.leftTag[index],
-                off: Math.round(val.offsetTop),
-                hight: val.clientHeight,
-              };
-            }
-          );
+      return [...this.$refs.items.childNodes].map((val, index) => {
+        return {
+          tagDom: this.$refs.leftTag[index],
+          off: Math.round(val.offsetTop),
+          hight: val.clientHeight
+        };
+      });
     }
   },
   computed: {},
-  mounted() {
+  created() {
     //分发action
     this.$store
       .dispatch("fetchShopItems")
-      .then(() => {
+      .then(res => {
         //给组件赋值
-        this.item = this.$store.state.shop.restaurant_items;
+        this.item = res.data;
         this.itemNames = this.$store.getters.getItemsHeader;
       })
       .then(() => {
         // 获取组件高度
-          this.itemsHeight = this.getItemHeight()
-          this.show = false
-      })
+        this.itemsHeight = this.getItemHeight();
+        this.show = false;
+      });
   },
   watch: {
-    '$store.state.shop.is_scoll': function() {
-      console.log(111)
-      this.scroll = this.$store.state.shop.is_scoll
+    "$store.state.shop.is_scoll": function() {
+      console.log(this.$store.state.shop.is_scoll)
+      this.scroll = this.$store.state.shop.is_scoll;
     }
   }
 };
