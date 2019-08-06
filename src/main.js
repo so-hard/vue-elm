@@ -7,7 +7,7 @@ import './plugins/element.js'
 
 Vue.config.productionTip = false
 Vue.directive('scroll', {
-  inserted: function (el, binding) {
+  inserted (el, binding) {
     //节流
     let Timeout;
     let time = 800
@@ -32,7 +32,7 @@ Vue.directive('scroll', {
     }
   },
 
-  unbind: function(el) {
+  unbind(el) {
     if(el.cur){
       el.removeEventListener('scroll',el._onScroll);
     }else{
