@@ -74,6 +74,7 @@ const state = {
           commit('setRestaurantItems',{
             data : res.data
           })
+          return res
         }
       )
     },
@@ -86,6 +87,7 @@ const state = {
           commit('setRestaurantDetail', {
             data: res.data
           })
+          return res
         }
       )
     }
