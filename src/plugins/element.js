@@ -10,7 +10,6 @@ import {
     Form,
     FormItem,
     Input,
-    Loading,
     Tag,
     Cascader,
     Progress
@@ -27,7 +26,6 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Button)
 Vue.use(Input)
-Vue.use(Loading)
 Vue.use(Tag)
 Vue.use(Cascader)
 Vue.use(Progress)

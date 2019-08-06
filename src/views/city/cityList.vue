@@ -1,7 +1,7 @@
 <template>
   <section class="city" 
-    v-loading = 'loading'
   >
+    <Loading v-show="loading"/> 
     <CommentHeader headerText="选择城市"/>
     <section class="hot-city">
       <el-tag v-for="(city) in hotCity" 
@@ -12,7 +12,7 @@
     </section>
     <section class="group-city">
       <section 
-      v-for="(city, cityName) in sortgroupcity" 
+      v-for="(city, cityName) in sortGroupcity" 
       :key="cityName" 
       ref="cityHead">
         <div class="city-head" >{{cityName}}</div>
@@ -42,7 +42,7 @@
 import CommentHeader from "../../components/CommentHeader.vue";
 import {getCity} from '../../serve/getData'
 import {removeClass,setClass} from '../../extend/classAction'
-
+import Loading from '../../components/Loading'
 // import { setTimeout, setInterval } from 'timers';
 
 export default {
@@ -57,7 +57,8 @@ export default {
     };
   },
   components: {
-    CommentHeader
+    CommentHeader,
+    Loading
   },
   methods: {
     loacteCity(palce){
@@ -80,46 +81,14 @@ export default {
       //判断被浏览器卷走的高度
       // console.log(arguments)
        if( window.scrollY >= val.off && window.scrollY < val.off+ val.hight-10){
-        console.log(el)
         setClass(el,'skr')
       }else{
         removeClass(el,'skr')
       }
-      //      if( window.scrollY >= binding.value.off && window.scrollY < binding.value.off+ binding.value.hight-10){
-      //   console.log("skr")
-      //   setClass(el,'skr')
-      // }else{
-      //   removeClass(el,'skr')
-      // }
-    }
-  },
-  computed: {
-    sortgroupcity() {
-      let sortobj = {};
-      for (let i = 65; i <= 90; i++) {
-        if (this.allCity[String.fromCharCode(i)]) {
-          sortobj[String.fromCharCode(i)] = this.allCity[
-            String.fromCharCode(i)
-          ];
-        }
-      }
-      return sortobj;
     },
 
-  },
-  async beforeCreate() {
-    //热门城市
-   await getCity('hot').then(res => {
-      this.hotCity = res.data;
-    });
-
-    //所有城市
-   await getCity('group').then(res => {
-      this.allCity = res.data;
-      this.$nextTick(() => {
-        // 当视图更新后拿到cityHead的dom
-        let cityHead = this.$refs.cityHead;
-        // console.log(cityHead)
+    setTagItem() {
+          let cityHead = this.$refs.cityHead;
         this.headTop = cityHead.map(val => {
                 return {
                   /*
@@ -132,14 +101,36 @@ export default {
                     classSkr: ''
                 }
         });
-      });
-    });
-    this.loading = false
-    // console.log(this.hotCity)
+    }
   },
-  mounted() {
-     
-  }
+  computed: {
+    sortGroupcity() {
+      let sortobj = {};
+      for (let i = 65; i <= 90; i++) {
+        if (this.allCity[String.fromCharCode(i)]) {
+          sortobj[String.fromCharCode(i)] = this.allCity[
+            String.fromCharCode(i)
+          ];
+        }
+      }
+      return sortobj;
+    },
+
+  },
+   mounted() {
+    //热门城市
+    getCity('hot').then(res => {
+      this.hotCity = res.data;
+    });
+
+    //所有城市
+    getCity('group').then(res => {
+      this.allCity = res.data;
+    }).then(()=> {
+      this.setTagItem()
+      this.loading = false
+    });
+  },
 };
 </script>
 
