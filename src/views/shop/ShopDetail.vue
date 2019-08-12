@@ -25,14 +25,12 @@
 </template>
 
 <script>
-
 export default {
   name: 'shopdetail',
   data() {
     return{
-      headerDate: {},
+      headerDate: [],
       baseImg: "//elm.cangdu.org/img/",
-      
     }
   },
   computed:{
@@ -71,14 +69,9 @@ export default {
     this.checkId()
   },
   mounted() {
-    // getRestaurantDetail(this.id).then((res) => {
-    //   this.headerDate = res.data
-    // })
-    this.$store.dispatch('fetchRestaurantDetail',{
-      id: this.id
-    }).then( (res)=> {
-      // console.log(this.$store.state.shop.header)
-      this.headerDate = res.data
+    this.$store.dispatch('fetchRestaurantDetail')
+    .then( (res)=> {
+      this.headerDate = res
     })
   },
   watch: {

@@ -10,7 +10,7 @@
       <ul>
         <li
           class="left-tag"
-          v-for="(item, index) in itemNames"
+          v-for="(item, index) in getItemsHeader"
           :key="index"
           ref="leftTag"
           :class="index == 0 ? 'active' : ''"
@@ -27,7 +27,7 @@
       overflowY: scroll
     }"
     >
-      <section class="item" v-for="lists in item" :key="lists.id">
+      <section class="item" v-for="lists in restaurant_items" :key="lists.id">
         <div class="title">
           <span>{{lists.name}}</span>
           <span class="description">{{lists.description}}</span>
@@ -62,6 +62,8 @@ import Rate from "./Rate";
 import Loading from "./../Loading";
 import NumControl from "./NumControl";
 
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     Loading,
@@ -73,11 +75,10 @@ export default {
     return {
       baseImg: "//elm.cangdu.org/img/",
       resId: null,
-      item: null,
-      itemNames: null,
       show: true,
       itemsHeight: [],
-      scroll: "hidden"
+      scroll: "hidden",
+      restaurant_items: null
     };
   },
   methods: {
@@ -116,25 +117,24 @@ export default {
       });
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["getItemsHeader"])
+  },
   created() {
     //分发action
     this.$store
       .dispatch("fetchShopItems")
       .then(res => {
-        //给组件赋值
-        this.item = res.data;
-        this.itemNames = this.$store.getters.getItemsHeader;
+        // 获取组件高度
+        this.restaurant_items = res;
       })
       .then(() => {
-        // 获取组件高度
         this.itemsHeight = this.getItemHeight();
         this.show = false;
       });
   },
   watch: {
     "$store.state.shop.is_scoll": function() {
-      console.log(this.$store.state.shop.is_scoll)
       this.scroll = this.$store.state.shop.is_scoll;
     }
   }

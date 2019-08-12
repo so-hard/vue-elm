@@ -6,9 +6,9 @@ const state = {
     delivery_mode: null, //配送方式
     support_ids: null, //服务支持
     resId: null,
-    restaurant_detail: null,
     restaurant_items: null,
-    is_scoll: null
+    is_scoll: null,
+    shoppingCart : null
   },
   getters = {
     getRestaurantId: state => {
@@ -21,19 +21,13 @@ const state = {
       return state.resId
     },
     getItemsHeader: state => {
-      console.log(typeof state.restaurant_items)
       if(state.restaurant_items != null){
         let arr = [];
          arr = state.restaurant_items.map( val=> {
           return val.name
         })
-        console.log(arr)
         return arr
       }
-       
-      // return [] = state.restaurant_items.map(val => {
-      //   return val.name;
-      // })
     }
   },
 
@@ -53,14 +47,14 @@ const state = {
     setResId(state, id) {
       state.resId = id
     },
-    setRestaurantDetail(state,payload){
-      state.restaurant_detail = payload.data
-    },
     setRestaurantItems(state,payload){
       state.restaurant_items = payload.data
     },
     setScroll(state,val){
       state.is_scoll = val
+    },
+    addShop(state){
+
     }
   },
 
@@ -74,20 +68,17 @@ const state = {
           commit('setRestaurantItems',{
             data : res.data
           })
-          return res
+          return res.data
         }
       )
     },
 
     fetchRestaurantDetail({
-      commit
-    }, payload) {
-      return getRestaurantDetail(payload.id).then(
+      state
+    }) {
+      return getRestaurantDetail(state.resId).then(
         res => {
-          commit('setRestaurantDetail', {
-            data: res.data
-          })
-          return res
+            return res.data
         }
       )
     }

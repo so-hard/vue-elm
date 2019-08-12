@@ -1,9 +1,9 @@
 <template>
   <section class="num-control">
-    <svg v-show="isShow" class="icon" aria-hidden="true" @click="num--">
+    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="num--">
       <use xlink:href="#icon-Minuswithcircle" />
     </svg>
-    <span v-show="isShow">{{num}}</span>
+    <span v-show="num === 0 ? false : true">{{num}}</span>
     <svg class="icon" aria-hidden="true" @click="numAdd">
       <use xlink:href="#icon-add" />
     </svg>
@@ -20,9 +20,6 @@ export default {
     };
   },
   computed: {
-    isShow() {
-      return this.num == 0 ? false : true;
-    }
   },
   methods: {
     numAdd() {
