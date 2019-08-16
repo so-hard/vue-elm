@@ -148,7 +148,7 @@ export default {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  height: 90vh;
+  height: 93vh;
 
   .left {
     width: 30vw;

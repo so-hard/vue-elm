@@ -1,5 +1,5 @@
 <template>
-  <section class="shop-detail"  v-scroll={hey}>
+  <section class="shop-detail"  v-scroll={hey,time:0}>
     <header>
       <section class="header-top" :style="img">
         <img :src="baseImg+headerDate.image_path" alt="">
@@ -51,7 +51,7 @@ export default {
     },
     hey(){
       console.log(window.scrollY)
-        if(window.scrollY >= 220){
+        if(window.scrollY >= 250){
           // setClass(el,"fixed")
           if(this.$store.state.shop.is_scoll != 'scroll') {
               this.$store.commit('setScroll','scroll')
@@ -132,8 +132,7 @@ header
     width 100vw
     display flex
     justify-content center
-    position sticky
     .el-menu-item
-      height 15vw
+      height 7vh
 </style>
 
