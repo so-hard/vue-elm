@@ -1,6 +1,6 @@
 <template>
   <section class="num-control">
-    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="num--">
+    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="numReduce">
       <use xlink:href="#icon-Minuswithcircle" />
     </svg>
     <span v-show="num === 0 ? false : true">{{num}}</span>
@@ -19,14 +19,19 @@ export default {
       show: false
     };
   },
-  computed: {
-  },
+  props: ['shop'],
   methods: {
     numAdd() {
-      this.$emit('test','test')
-      this.num ++
+      let shop = this.shop
+      this.$store.commit('addShopCar',shop)
+      this.num = this.$store.getters.getCarListNum(shop)
+    },
+    numReduce(){
+      let shop = this.shop
+      this.$store.commit('decreaseShopCar',shop)
+      this.num = this.$store.getters.getCarListNum(shop)
     }
-  }
+  },
 };
 </script>
 

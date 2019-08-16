@@ -8,7 +8,7 @@ const state = {
     resId: null,
     restaurant_items: null,
     is_scoll: null,
-    shoppingCart : null
+    shoppingCar: new Map(),
   },
   getters = {
     getRestaurantId: state => {
@@ -28,6 +28,9 @@ const state = {
         })
         return arr
       }
+    },
+    getCarListNum: state => key => {
+      return state.shoppingCar.get(key)
     }
   },
 
@@ -53,8 +56,13 @@ const state = {
     setScroll(state,val){
       state.is_scoll = val
     },
-    addShop(state){
-
+    addShopCar(state,val){
+      let car  = state.shoppingCar;
+      car.has(val) ? car.set(val, car.get(val)+1) : car.set(val,1)
+    },
+    decreaseShopCar(state,val) {
+      let car = state.shoppingCar;
+      car.set(val,car.get(val)-1)
     }
   },
 

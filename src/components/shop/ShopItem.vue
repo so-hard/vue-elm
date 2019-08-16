@@ -45,7 +45,7 @@
               <div class="item-fooder">
                 <span style="color: red">{{list.specfoods[0].price}}￥起送</span>
                 <div class="item-control">
-                  <NumControl />
+                  <NumControl :shop="list.specfoods[0]"/>
                 </div>
               </div>
             </section>
