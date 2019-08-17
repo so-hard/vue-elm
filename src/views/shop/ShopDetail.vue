@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-17 14:53:49
+ * @LastEditTime: 2019-08-17 14:53:49
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="shop-detail"  v-scroll={hey,time:0}>
     <header>
@@ -67,6 +74,7 @@ export default {
   props: ['id'],
   created(){
     this.checkId()
+    this.$store.commit('setCurCar')
   },
   mounted() {
     this.$store.dispatch('fetchRestaurantDetail')

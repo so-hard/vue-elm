@@ -1,3 +1,10 @@
+/*
+ * @Description: shop data some action
+ * @Author: so-hard
+ * @Date: 2019-08-17 14:49:50
+ * @LastEditTime: 2019-08-17 14:55:58
+ * @LastEditors: Please set LastEditors
+ */
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
 
 const state = {
@@ -8,7 +15,9 @@ const state = {
     resId: null,
     restaurant_items: null,
     is_scoll: null,
-    shoppingCar: new Map(),
+    shoppingCar: {
+
+    },
   },
   getters = {
     getRestaurantId: state => {
@@ -30,7 +39,7 @@ const state = {
       }
     },
     getCarListNum: state => key => {
-      return state.shoppingCar.get(key)
+      return state.shoppingCar[state.resId].get(key)
     }
   },
 
@@ -40,6 +49,9 @@ const state = {
     },
     setOrderId(state, id) {
       state.order_by = id
+    },
+    setCurCar(state){
+      state.shoppingCar[state.resId] = new Map()
     },
     setSupportId(state, id) {
       state.support_ids = id
@@ -57,11 +69,11 @@ const state = {
       state.is_scoll = val
     },
     addShopCar(state,val){
-      let car  = state.shoppingCar;
+      let car  = state.shoppingCar[state.resId];
       car.has(val) ? car.set(val, car.get(val)+1) : car.set(val,1)
     },
     decreaseShopCar(state,val) {
-      let car = state.shoppingCar;
+      let car = state.shoppingCar[state.resId];
       car.set(val,car.get(val)-1)
     }
   },
