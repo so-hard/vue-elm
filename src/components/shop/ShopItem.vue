@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-19 17:56:41
+ * @LastEditTime: 2019-08-20 18:50:46
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="shop-item">
     <Loading v-if="show" />
@@ -45,7 +52,7 @@
               <div class="item-fooder">
                 <span style="color: red">{{list.specfoods[0].price}}￥起送</span>
                 <div class="item-control">
-                  <NumControl :shop="list.specfoods[0]"/>
+                  <NumControl @getOrderNum="getOrderNum" :shop="list.specfoods[0]"/>
                 </div>
               </div>
             </section>
@@ -53,6 +60,10 @@
         </section>
       </section>
     </section>
+    <el-badge :value="shopCartNum" class="car" :hidden="shopCartNum>0?false:true">
+      <el-button   circle  type="primary" :icon="shopCartNum>0?'el-icon-shopping-cart-full':'el-icon-shopping-cart-1'">
+      </el-button>
+    </el-badge>
   </section>
 </template>
 
@@ -78,7 +89,8 @@ export default {
       show: true,
       itemsHeight: [],
       scroll: "hidden",
-      restaurant_items: null
+      restaurant_items: null,
+      shopCartNum: 0,
     };
   },
   methods: {
@@ -95,7 +107,9 @@ export default {
         }
       });
     },
-
+  getOrderNum(){
+    this.shopCartNum  = this.$store.getters.getTotalNum()
+  },
     getItemHead(data) {
       //侧导航
       this.itemName = data.map(val => {
@@ -118,7 +132,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getItemsHeader"])
+    ...mapGetters(["getItemsHeader"]),
+    // changeIcon(){
+    // }
   },
   created() {
     //分发action
@@ -149,7 +165,6 @@ export default {
   display: flex;
   justify-content: flex-end;
   height: 93vh;
-
   .left {
     width: 30vw;
     display: flex;
@@ -256,5 +271,10 @@ export default {
       }
     }
   }
-}
+  .car{
+    position fixed
+    bottom 0
+    transform translate(-5vw,0)
+  }
+  }
 </style>

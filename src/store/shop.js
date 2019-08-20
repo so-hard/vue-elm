@@ -2,7 +2,7 @@
  * @Description: shop data some action
  * @Author: so-hard
  * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-17 14:55:58
+ * @LastEditTime: 2019-08-20 17:29:19
  * @LastEditors: Please set LastEditors
  */
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
@@ -40,6 +40,11 @@ const state = {
     },
     getCarListNum: state => key => {
       return state.shoppingCar[state.resId].get(key)
+    },
+    getTotalNum: state => () =>{
+      return [...state.shoppingCar[state.resId].values()].reduce((acc,cur)=>{
+        return acc+cur
+      },0)
     }
   },
 

@@ -1,3 +1,10 @@
+/*
+ * @Description: 引入新的组件
+ * @Author: so-hard
+ * @Date: 2019-08-20 17:34:22
+ * @LastEditTime: 2019-08-20 17:34:51
+ * @LastEditors: Please set LastEditors
+ */
 import Vue from 'vue'
 import {
     Menu,
@@ -12,7 +19,8 @@ import {
     Input,
     Tag,
     Cascader,
-    Progress
+    Progress,
+    Badge
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -29,6 +37,7 @@ Vue.use(Input)
 Vue.use(Tag)
 Vue.use(Cascader)
 Vue.use(Progress)
+Vue.use(Badge)
 
 
 
