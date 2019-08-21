@@ -2,7 +2,7 @@
  * @Description: shop data some action
  * @Author: so-hard
  * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-20 17:29:19
+ * @LastEditTime: 2019-08-21 19:28:18
  * @LastEditors: Please set LastEditors
  */
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
@@ -39,12 +39,17 @@ const state = {
       }
     },
     getCarListNum: state => key => {
-      return state.shoppingCar[state.resId].get(key)
+      if(state.shoppingCar[state.resId][key])
+        return state.shoppingCar[state.resId][key][1]
+      return 0
     },
-    getTotalNum: state => () =>{
-      return [...state.shoppingCar[state.resId].values()].reduce((acc,cur)=>{
-        return acc+cur
-      },0)
+    getTotalNum: state => () => {
+      let cart = state.shoppingCar[state.resId]
+      return Object.keys(cart).map(
+        (val)=> cart[val][1]
+      ).reduce(
+        (acc,cur)=> acc+cur,0
+      )
     }
   },
 
@@ -56,7 +61,8 @@ const state = {
       state.order_by = id
     },
     setCurCar(state){
-      state.shoppingCar[state.resId] = new Map()
+      if(!state.shoppingCar[state.resId])
+        state.shoppingCar[state.resId] = {}
     },
     setSupportId(state, id) {
       state.support_ids = id
@@ -74,12 +80,20 @@ const state = {
       state.is_scoll = val
     },
     addShopCar(state,val){
-      let car  = state.shoppingCar[state.resId];
-      car.has(val) ? car.set(val, car.get(val)+1) : car.set(val,1)
+      let cart  = state.shoppingCar[state.resId];
+      if(!cart[val._id]){
+        cart[val._id]=[]
+        cart[val._id].push(val)
+        cart[val._id].push(0)
+      }
+      cart[val._id][1]++
     },
     decreaseShopCar(state,val) {
-      let car = state.shoppingCar[state.resId];
-      car.set(val,car.get(val)-1)
+      let cart = state.shoppingCar[state.resId];
+      cart[val._id][1]--
+    },
+    setCart(state,val){
+      state.shoppingCar = JSON.parse(val) 
     }
   },
 

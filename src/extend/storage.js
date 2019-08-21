@@ -1,7 +1,18 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 19:05:04
+ * @LastEditTime: 2019-08-21 19:12:23
+ * @LastEditors: Please set LastEditors
+ */
 
 
 
-// 存储localStoreage
+/**
+ * @description:  存储localStoreage
+ * @param: name:String,content:Any
+ * @return: void
+ */
 export const setStore = (name, content) => {
     if(!name) return;
     if(typeof content !== 'string'){

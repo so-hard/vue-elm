@@ -2,16 +2,16 @@
  * @Description: In User Settings Edit
  * @Author: so-hard
  * @Date: 2019-08-20 16:06:41
- * @LastEditTime: 2019-08-20 16:56:35
+ * @LastEditTime: 2019-08-21 11:44:38
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <section class="num-control">
-    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="numReduce">
+    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="()=> numDone('decreaseShopCar')">
       <use xlink:href="#icon-Minuswithcircle" />
     </svg>
     <span v-show="num === 0 ? false : true">{{num}}</span>
-    <svg class="icon" aria-hidden="true" @click="numAdd">
+    <svg class="icon" aria-hidden="true" @click="()=> numDone('addShopCar')">
       <use xlink:href="#icon-add" />
     </svg>
   </section>
@@ -28,19 +28,17 @@ export default {
   },
   props: ['shop'],
   methods: {
-    numAdd() {
+    numDone(name){
       let shop = this.shop
-      this.$store.commit('addShopCar',shop)
-      this.num = this.$store.getters.getCarListNum(shop)
-      this.$emit('getOrderNum')
-    },
-    numReduce(){
-      let shop = this.shop
-      this.$store.commit('decreaseShopCar',shop)
-      this.num = this.$store.getters.getCarListNum(shop)
+      this.$store.commit(name,shop)
+      this.num = this.$store.getters.getCarListNum(shop._id)
       this.$emit('getOrderNum')
     }
   },
+  mounted(){
+    let shop = this.shop
+    this.num = this.$store.getters.getCarListNum(shop._id)
+  }
 };
 </script>
 

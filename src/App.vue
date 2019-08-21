@@ -1,3 +1,10 @@
+<!--
+ * @Description: 初始化获取购物车本地存储
+ * @Author: so-hard
+ * @Date: 2019-08-21 19:21:30
+ * @LastEditTime: 2019-08-21 19:25:31
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
     <router-view ></router-view>
@@ -22,7 +29,8 @@ export default {
   methods: {
     ...mapMutations([
       'setUserInfo',
-      'setUserId'
+      'setUserId',
+      'setCart'
     ]),
     
   },
@@ -33,12 +41,11 @@ export default {
   },
 
   created() {
-    let userinfo = getStore("userinfo")
-    if (userinfo != null) {
-      // console.log(typeof userInfo)
-        // console.log(userInfo)
+    let userinfo = getStore("userinfo"),
+    userCart = getStore('cart')
+    if (userinfo != null||userCart !=null) {
       this.setUserInfo(userinfo);
-      
+      this.setCart(userCart)
     }
   }
 };

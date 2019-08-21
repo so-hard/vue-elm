@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-08-20 18:50:46
+ * @LastEditTime: 2019-08-21 19:30:04
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -73,6 +73,7 @@ import Rate from "./Rate";
 import Loading from "./../Loading";
 import NumControl from "./NumControl";
 
+import {setStore} from './../../extend/storage'
 import { mapGetters } from "vuex";
 
 export default {
@@ -145,9 +146,15 @@ export default {
         this.restaurant_items = res;
       })
       .then(() => {
+        this.getOrderNum()
         this.itemsHeight = this.getItemHeight();
         this.show = false;
       });
+  },
+
+  beforeDestroy(){
+    let data = this.$store.state.shop.shoppingCar;
+    setStore('cart',data)
   },
   watch: {
     "$store.state.shop.is_scoll": function() {
