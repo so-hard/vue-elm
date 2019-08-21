@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-08-21 19:30:04
+ * @LastEditTime: 2019-08-21 22:58:28
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -61,9 +61,13 @@
       </section>
     </section>
     <el-badge :value="shopCartNum" class="car" :hidden="shopCartNum>0?false:true">
-      <el-button   circle  type="primary" :icon="shopCartNum>0?'el-icon-shopping-cart-full':'el-icon-shopping-cart-1'">
+      <el-button   circle  type="primary" :icon="shopCartNum>0?'el-icon-shopping-cart-full':'el-icon-shopping-cart-1'" @click="drawer = true">
       </el-button>
     </el-badge>
+    <el-drawer
+    title="cart" :visible.sync="drawer" direction="btt">
+    
+    </el-drawer>
   </section>
 </template>
 
@@ -92,6 +96,7 @@ export default {
       scroll: "hidden",
       restaurant_items: null,
       shopCartNum: 0,
+      drawer: false
     };
   },
   methods: {

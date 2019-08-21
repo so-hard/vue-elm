@@ -2,7 +2,7 @@
  * @Description: shop data some action
  * @Author: so-hard
  * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-21 19:28:18
+ * @LastEditTime: 2019-08-21 22:55:27
  * @LastEditors: Please set LastEditors
  */
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
@@ -50,7 +50,11 @@ const state = {
       ).reduce(
         (acc,cur)=> acc+cur,0
       )
-    }
+    },
+    // getCartShop: state => () => {
+    //   let cart = state.shoppingCar[state.resId],
+      
+    // }
   },
 
   mutations = {
