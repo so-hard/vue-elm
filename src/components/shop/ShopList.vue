@@ -1,7 +1,17 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-22 14:27:55
+ * @LastEditTime: 2019-08-22 14:41:36
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="shop-list" @click="go(list.id)">
     <div class="list-left">
-      <img :src="baseImg + list.image_path" alt>
+      <img :src="baseImg + list.image_path" >
+      <Tag v-if="getTotalNum(list.id)>0?true:false">
+        {{getTotalNum(list.id)}}
+      </Tag> 
     </div>
     <div class="list-right">
       <div class="list-floor">
@@ -30,14 +40,18 @@
 
 <script>
 import Rate from "./Rate";
+import Tag from "./../Tag"
+
+import {mapGetters} from "vuex"
 export default {
   name: "ShopList",
   components: {
-    Rate
+    Rate,
+    Tag
   },
   data() {
     return {
-      baseImg: "//elm.cangdu.org/img/"
+      baseImg: "//elm.cangdu.org/img/",
     };
   },
   props: ["list"],
@@ -50,7 +64,10 @@ export default {
         }
       })
     }
-  }
+  },
+  computed: {
+        ...mapGetters(["getTotalNum"])
+  },
 };
 </script>
 
@@ -68,9 +85,8 @@ export default {
    .list-left {
      z-index: 22;
      height: w = 20vw;
-     width: w;
      margin: auto 1vw;
-
+     position relative
      img {
        height: 100%;
        border: 2px solid #dcdfe6;

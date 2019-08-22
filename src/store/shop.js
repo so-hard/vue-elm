@@ -2,7 +2,7 @@
  * @Description: shop data some action
  * @Author: so-hard
  * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-21 22:55:27
+ * @LastEditTime: 2019-08-22 14:23:59
  * @LastEditors: Please set LastEditors
  */
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
@@ -33,28 +33,53 @@ const state = {
       if(state.restaurant_items != null){
         let arr = [];
          arr = state.restaurant_items.map( val=> {
-          return val.name
+           let data = {
+           }
+           data.name = val.name
+           data.id = val.id
+          return data
         })
         return arr
       }
     },
-    getCarListNum: state => key => {
-      if(state.shoppingCar[state.resId][key])
-        return state.shoppingCar[state.resId][key][1]
-      return 0
-    },
-    getTotalNum: state => () => {
+    getCarListNum: state => (itemid,curid) => {
       let cart = state.shoppingCar[state.resId]
-      return Object.keys(cart).map(
-        (val)=> cart[val][1]
-      ).reduce(
-        (acc,cur)=> acc+cur,0
+        if(cart){
+          if(cart[itemid]){
+            if(cart[itemid][curid])
+              return Object.keys(cart[itemid][curid]).length>0 ? cart[itemid][curid].quantity : 0
+          }
+        }
+        return 0
+    },
+    getItemCartNum: state => (itemId)=>{
+      let cart = state.shoppingCar[state.resId]
+      if(cart[itemId]){
+        let obj = cart[itemId]
+        return Object.keys(obj).reduce(
+          (acc,cur)=>{
+            return acc + obj[cur].quantity
+          },0
+        )
+      }
+    },
+    getTotalNum: state => (key) => {
+      let cart = state.shoppingCar[key]
+      if(!cart){
+        return 0
+      }
+      return Object.keys(cart).reduce(
+        (acc,cur)=> {
+          let obj = cart[cur],
+          a = Object.keys(obj).reduce(
+            (acc,cur)=> {
+              return acc + obj[cur].quantity
+            },0
+          )
+          return acc + a
+        },0
       )
     },
-    // getCartShop: state => () => {
-    //   let cart = state.shoppingCar[state.resId],
-      
-    // }
   },
 
   mutations = {
@@ -83,18 +108,19 @@ const state = {
     setScroll(state,val){
       state.is_scoll = val
     },
-    addShopCar(state,val){
-      let cart  = state.shoppingCar[state.resId];
-      if(!cart[val._id]){
-        cart[val._id]=[]
-        cart[val._id].push(val)
-        cart[val._id].push(0)
-      }
-      cart[val._id][1]++
+    addShopCar(state,payload){
+      let cart  = state.shoppingCar[state.resId],
+      {itemid,shopdata} = payload;
+      if(!cart[itemid])
+        cart[itemid]={}
+      if(!cart[itemid][shopdata.id])
+        cart[itemid][shopdata.id] = shopdata
+      cart[itemid][shopdata.id].quantity ++
     },
-    decreaseShopCar(state,val) {
-      let cart = state.shoppingCar[state.resId];
-      cart[val._id][1]--
+    decreaseShopCar(state,payload) {
+      let cart  = state.shoppingCar[state.resId],
+      {itemid,shopdata} = payload;
+      cart[itemid][shopdata.id].quantity --
     },
     setCart(state,val){
       state.shoppingCar = JSON.parse(val) 

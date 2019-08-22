@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: so-hard
  * @Date: 2019-08-20 16:06:41
- * @LastEditTime: 2019-08-21 11:44:38
+ * @LastEditTime: 2019-08-22 12:27:48
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -26,18 +26,21 @@ export default {
       show: false
     };
   },
-  props: ['shop'],
+  props: ['shopdata','itemid'],
   methods: {
     numDone(name){
-      let shop = this.shop
-      this.$store.commit(name,shop)
-      this.num = this.$store.getters.getCarListNum(shop._id)
+      let shopdata = this.shopdata
+      this.$store.commit(name,{
+        shopdata,
+        itemid:this.itemid
+      })
+      this.num = this.$store.getters.getCarListNum(this.itemid,shopdata.id)
       this.$emit('getOrderNum')
     }
   },
   mounted(){
-    let shop = this.shop
-    this.num = this.$store.getters.getCarListNum(shop._id)
+    let shopdata = this.shopdata
+    this.num = this.$store.getters.getCarListNum(this.itemid,shopdata.id)
   }
 };
 </script>

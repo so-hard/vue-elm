@@ -1,8 +1,17 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-22 14:21:47
+ * @LastEditTime: 2019-08-22 14:28:12
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="shop-main" v-scroll="{hey}">
     <Loading  v-show="loadingConr"/>
     <ShopSeclct />
-    <ShopList v-for="list in RestaurantList" :key="list.id" :list="list"/>
+    <ShopList v-for="list in RestaurantList" :key="list.id" :list="list">
+      
+    </ShopList>
   </section>
 </template>
 
@@ -18,7 +27,7 @@ export default {
   components: {
     ShopList,
     ShopSeclct,
-    Loading
+    Loading,
   },
   props: ["text"],
   data() {
@@ -43,7 +52,7 @@ export default {
         support_ids: null,
         restaurant_category_ids: this.$store.getters.getRestaurantId
       };
-    }
+    },
   },
   methods: {
     hey() {

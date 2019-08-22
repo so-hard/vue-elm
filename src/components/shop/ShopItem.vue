@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-08-21 22:58:28
+ * @LastEditTime: 2019-08-22 14:16:39
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -18,11 +18,15 @@
         <li
           class="left-tag"
           v-for="(item, index) in getItemsHeader"
-          :key="index"
+          :key="item.id"
           ref="leftTag"
           :class="index == 0 ? 'active' : ''"
           @click="locatTag(index)"
-        >{{item}}</li>
+        >{{item.name}}
+          <Tag v-if="(getItemCartNum(item.id))>0? true:false">
+            {{getItemCartNum(item.id)}}
+          </Tag> 
+        </li>
       </ul>
     </section>
     <!-- 右侧菜品 -->
@@ -52,7 +56,11 @@
               <div class="item-fooder">
                 <span style="color: red">{{list.specfoods[0].price}}￥起送</span>
                 <div class="item-control">
-                  <NumControl @getOrderNum="getOrderNum" :shop="list.specfoods[0]"/>
+                  <NumControl
+                    @getOrderNum="getOrderNum"
+                    :itemid="lists.id"
+                    :shopdata="formatData(list.specfoods[0])"
+                  />
                 </div>
               </div>
             </section>
@@ -60,13 +68,16 @@
         </section>
       </section>
     </section>
-    <el-badge :value="shopCartNum" class="car" :hidden="shopCartNum>0?false:true">
-      <el-button   circle  type="primary" :icon="shopCartNum>0?'el-icon-shopping-cart-full':'el-icon-shopping-cart-1'" @click="drawer = true">
-      </el-button>
+    <el-badge v-show="!show" :value="shopCartNum" class="car" :hidden="shopCartNum>0?false:true">
+      <el-button
+        circle
+        type="primary"
+        :icon="shopCartNum>0?'el-icon-shopping-cart-full':'el-icon-shopping-cart-1'"
+        @click="drawer = true"
+      ></el-button>
     </el-badge>
-    <el-drawer
-    title="cart" :visible.sync="drawer" direction="btt">
-    
+    <el-drawer title="cart" :visible.sync="drawer" direction="btt">
+      <!-- <section v-for="list in getCartShop" :key="list.id">{{list}}</section> -->
     </el-drawer>
   </section>
 </template>
@@ -76,15 +87,17 @@ import { removeClass, setClass } from "../../extend/classAction";
 import Rate from "./Rate";
 import Loading from "./../Loading";
 import NumControl from "./NumControl";
+import Tag from "./../Tag"
 
-import {setStore} from './../../extend/storage'
+import { setStore } from "./../../extend/storage";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     Loading,
     NumControl,
-    Rate
+    Rate,
+    Tag
   },
   name: "shopitem",
   data() {
@@ -113,9 +126,11 @@ export default {
         }
       });
     },
-  getOrderNum(){
-    this.shopCartNum  = this.$store.getters.getTotalNum()
-  },
+    getOrderNum() {
+      // console.log(this.$store.state.shop)
+      let key = this.$store.state.shop.resId
+      this.shopCartNum = this.$store.getters.getTotalNum(key);
+    },
     getItemHead(data) {
       //侧导航
       this.itemName = data.map(val => {
@@ -135,12 +150,24 @@ export default {
           hight: val.clientHeight
         };
       });
+    },
+    formatData(data) {
+      let result = {};
+      result.attrs = [];
+      result.estra = {};
+      result.id = data.food_id;
+      result.name = data.name;
+      result.packing_fee = data.packing_fee;
+      result.price = data.price;
+      result.sku_id = data.sku_id;
+      result.specs = data.specs;
+      result.stock = data.stock;
+      result.quantity = 0
+      return result
     }
   },
   computed: {
-    ...mapGetters(["getItemsHeader"]),
-    // changeIcon(){
-    // }
+    ...mapGetters(["getItemsHeader","getItemCartNum"]),
   },
   created() {
     //分发action
@@ -151,15 +178,15 @@ export default {
         this.restaurant_items = res;
       })
       .then(() => {
-        this.getOrderNum()
+        this.getOrderNum();
         this.itemsHeight = this.getItemHeight();
         this.show = false;
       });
   },
-
-  beforeDestroy(){
+  beforeDestroy() {
     let data = this.$store.state.shop.shoppingCar;
-    setStore('cart',data)
+    console.log(data)
+    setStore("cart", data);
   },
   watch: {
     "$store.state.shop.is_scoll": function() {
@@ -177,6 +204,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   height: 93vh;
+
   .left {
     width: 30vw;
     display: flex;
@@ -191,9 +219,10 @@ export default {
       overflow-x: hidden;
 
       li {
+        position relative
         width: 30vw;
         fontOver();
-        padding: 2vw;
+        padding: 2vw 0;
       }
     }
   }
@@ -283,10 +312,11 @@ export default {
       }
     }
   }
-  .car{
-    position fixed
-    bottom 0
-    transform translate(-5vw,0)
+
+  .car {
+    position: fixed;
+    bottom: 0;
+    transform: translate(-5vw, 0);
   }
-  }
+}
 </style>
