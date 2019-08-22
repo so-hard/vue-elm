@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
     .tag {
         position: absolute;
         top: 0;
@@ -30,5 +30,6 @@ export default {
         background: #F56C6C;
         border-radius: 50%;
         text-align: center
+        line-height 3vw
     }
 </style>
