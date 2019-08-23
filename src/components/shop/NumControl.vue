@@ -7,10 +7,10 @@
  -->
 <template>
   <section class="num-control">
-    <svg v-show="num === 0 ? false : true" class="icon" aria-hidden="true" @click="()=> numDone('decreaseShopCar')">
+    <svg v-show="getNum === 0 ? false : true" class="icon" aria-hidden="true" @click="()=> numDone('decreaseShopCar')">
       <use xlink:href="#icon-Minuswithcircle" />
     </svg>
-    <span v-show="num === 0 ? false : true">{{num}}</span>
+    <span v-show="getNum === 0 ? false : true">{{getNum}}</span>
     <svg class="icon" aria-hidden="true" @click="()=> numDone('addShopCar')">
       <use xlink:href="#icon-add" />
     </svg>
@@ -34,14 +34,14 @@ export default {
         shopdata,
         itemid:this.itemid
       })
-      this.num = this.$store.getters.getCarListNum(this.itemid,shopdata.id)
       this.$emit('getOrderNum')
     }
   },
-  mounted(){
-    let shopdata = this.shopdata
-    this.num = this.$store.getters.getCarListNum(this.itemid,shopdata.id)
-  }
+  computed:{
+    getNum(){
+      return this.$store.getters.getCarListNum(this.itemid,this.shopdata.id)
+    }
+  },
 };
 </script>
 

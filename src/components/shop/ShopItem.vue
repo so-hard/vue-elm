@@ -59,7 +59,7 @@
                   <NumControl
                     @getOrderNum="getOrderNum"
                     :itemid="lists.id"
-                    :shopdata="formatData(list.specfoods[0])"
+                    :shopdata="formatData(list.specfoods[0],lists.id)"
                   />
                 </div>
               </div>
@@ -76,8 +76,17 @@
         @click="drawer = true"
       ></el-button>
     </el-badge>
-    <el-drawer title="cart" :visible.sync="drawer" direction="btt">
-      <!-- <section v-for="list in getCartShop" :key="list.id">{{list}}</section> -->
+    <el-drawer title="已选商品" :visible.sync="drawer" direction="btt" :show-close="false">
+      <ul>
+        <li v-for="list in getShopcartList" :key="list.id">
+          <span class="name">{{list.name}}</span>
+          <span class="price">{{list.price*list.quantity}}</span>
+          <NumControl
+          :itemid="list.itemid"
+          :shopdata="list"
+          />
+        </li>
+      </ul>
     </el-drawer>
   </section>
 </template>
@@ -151,7 +160,7 @@ export default {
         };
       });
     },
-    formatData(data) {
+    formatData(data,itemid) {
       let result = {};
       result.attrs = [];
       result.estra = {};
@@ -162,12 +171,13 @@ export default {
       result.sku_id = data.sku_id;
       result.specs = data.specs;
       result.stock = data.stock;
-      result.quantity = 0
+      result.quantity = 0;
+      result.itemid = itemid
       return result
     }
   },
   computed: {
-    ...mapGetters(["getItemsHeader","getItemCartNum"]),
+    ...mapGetters(["getItemsHeader","getItemCartNum","getShopcartList"]),
   },
   created() {
     //分发action
@@ -185,7 +195,7 @@ export default {
   },
   beforeDestroy() {
     let data = this.$store.state.shop.shoppingCar;
-    console.log(data)
+    // console.log(data)
     setStore("cart", data);
   },
   watch: {

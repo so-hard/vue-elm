@@ -1,10 +1,11 @@
 /*
- * @Description: shop data some action
- * @Author: so-hard
- * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-22 14:23:59
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-23 09:10:54
+ * @LastEditTime: 2019-08-23 20:09:56
  * @LastEditors: Please set LastEditors
  */
+
 import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
 
 const state = {
@@ -19,6 +20,7 @@ const state = {
 
     },
   },
+
   getters = {
     getRestaurantId: state => {
       return state.restaurant_category_id
@@ -42,6 +44,12 @@ const state = {
         return arr
       }
     },
+    /**
+     * @description: 
+     * @param {number} itemId {number}
+     * @param curid 
+     * @return: 
+     */    
     getCarListNum: state => (itemid,curid) => {
       let cart = state.shoppingCar[state.resId]
         if(cart){
@@ -63,6 +71,13 @@ const state = {
         )
       }
     },
+
+
+    /**
+     * @description: 获取一个店铺添加到购物车的数量
+     * @param key {Number}  店铺的id
+     * @return: function
+     */    
     getTotalNum: state => (key) => {
       let cart = state.shoppingCar[key]
       if(!cart){
@@ -72,14 +87,32 @@ const state = {
         (acc,cur)=> {
           let obj = cart[cur],
           a = Object.keys(obj).reduce(
-            (acc,cur)=> {
-              return acc + obj[cur].quantity
-            },0
+            (acc,cur)=>  acc + obj[cur].quantity,0
           )
           return acc + a
         },0
       )
     },
+
+    getShopcartList: state => {
+      let cart = state.shoppingCar[state.resId],
+        reslut = [];
+      if(!cart){
+        return 0
+      }
+        let fun = (obj,dep)=>{
+          let data = obj;
+            for (const key in data) {
+              console.log(data[key])
+              if(dep>1)
+                fun(data[key],dep-1)
+              if(dep==1)
+                reslut.push(data[key])
+              }
+          }
+        fun(cart,2)
+        return reslut
+    }
   },
 
   mutations = {
