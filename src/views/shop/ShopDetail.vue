@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-17 14:53:49
- * @LastEditTime: 2019-08-17 14:53:49
+ * @LastEditTime: 2019-08-29 07:52:33
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -74,7 +74,7 @@ export default {
   props: ['id'],
   created(){
     this.checkId()
-    this.$store.commit('setCurCar')
+    this.$store.commit('setCurCart')
   },
   mounted() {
     this.$store.dispatch('fetchRestaurantDetail')

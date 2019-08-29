@@ -41,7 +41,7 @@
 <script>
 import CommentHeader from "../../components/CommentHeader.vue";
 import {getCity} from '../../serve/getData'
-import {removeClass,setClass} from '../../extend/classAction'
+import {removeClass,setClass} from '../../extend/tool'
 import Loading from '../../components/Loading'
 // import { setTimeout, setInterval } from 'timers';
 

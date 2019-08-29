@@ -1,11 +1,18 @@
 /*
- * @Description: shop data some action
- * @Author: so-hard
- * @Date: 2019-08-17 14:49:50
- * @LastEditTime: 2019-08-22 14:23:59
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-23 09:10:54
+ * @LastEditTime: 2019-08-29 18:34:36
  * @LastEditors: Please set LastEditors
  */
-import { getShiopItem,getRestaurantDetail } from "./../serve/getData";
+
+import {
+  getShiopItem,
+  getRestaurantDetail
+} from "./../serve/getData";
+import {
+  doneWithInsidValue
+} from "./../extend/tool"
 
 const state = {
     restaurant_category_id: [], //类别
@@ -15,10 +22,11 @@ const state = {
     resId: null,
     restaurant_items: null,
     is_scoll: null,
-    shoppingCar: {
+    shoppingCar: [
 
-    },
+    ],
   },
+
   getters = {
     getRestaurantId: state => {
       return state.restaurant_category_id
@@ -26,60 +34,75 @@ const state = {
     gtOrderId: state => {
       return state.order_by
     },
-    getResId: state => {
-      return state.resId
-    },
+
     getItemsHeader: state => {
-      if(state.restaurant_items != null){
+      if (state.restaurant_items != null) {
         let arr = [];
-         arr = state.restaurant_items.map( val=> {
-           let data = {
-           }
-           data.name = val.name
-           data.id = val.id
+        arr = state.restaurant_items.map(val => {
+          let data = {}
+          data.name = val.name
+          data.id = val.id
           return data
         })
         return arr
       }
     },
-    getCarListNum: state => (itemid,curid) => {
-      let cart = state.shoppingCar[state.resId]
-        if(cart){
-          if(cart[itemid]){
-            if(cart[itemid][curid])
-              return Object.keys(cart[itemid][curid]).length>0 ? cart[itemid][curid].quantity : 0
-          }
-        }
-        return 0
+    /**
+     * @description: 获取当前商品添加到购物车的数量
+     * @param {number} itemId 该商品位于哪个组
+     * @param {number} curid  自身id
+     * @return: 
+     */
+    getCarListNum: state => (itemid, curid) => {
+      let arr = [state.resId, itemid, curid],
+        reslut = doneWithInsidValue(state.shoppingCar, arr);
+      if(reslut[2])
+        return reslut[2].value.quantity
+      return 0
     },
-    getItemCartNum: state => (itemId)=>{
-      let cart = state.shoppingCar[state.resId]
-      if(cart[itemId]){
-        let obj = cart[itemId]
-        return Object.keys(obj).reduce(
-          (acc,cur)=>{
-            return acc + obj[cur].quantity
-          },0
-        )
-      }
+
+    /**
+     * @description: 获取该组添加到购物车的数量
+     * @param {number} itemId 店铺分类组id 
+     * @return: 
+     */
+    getItemCartNum: state => (itemId) => {
+      let reslut;
+       doneWithInsidValue(state.shoppingCar,[state.resId,itemId],(val)=>{
+        reslut= val.value.reduce((acc,cur)=>{
+          return acc + cur.value.quantity
+        },0)
+      })
+      return reslut
     },
-    getTotalNum: state => (key) => {
-      let cart = state.shoppingCar[key]
-      if(!cart){
-        return 0
-      }
-      return Object.keys(cart).reduce(
-        (acc,cur)=> {
-          let obj = cart[cur],
-          a = Object.keys(obj).reduce(
-            (acc,cur)=> {
-              return acc + obj[cur].quantity
-            },0
-          )
-          return acc + a
-        },0
-      )
+
+
+    /**
+     * @description: 该店铺加入购物车所有的数量
+     * @param key {Number}  店铺的id
+     * @return: function
+     */
+    getTotalNum: state => (key=state.resId) => {
+      let reslut;
+      doneWithInsidValue(state.shoppingCar,[key],(val)=>{
+        reslut = val.value.reduce((acc,val)=>{
+            return acc + val.value.reduce((acc,val)=>{
+            return acc+ val.value.quantity
+          },0)
+        },0)
+      })
+      return reslut
     },
+
+    getShopcartList: state => {
+      let reslut= [];
+      doneWithInsidValue(state.shoppingCar,[state.resId],(val)=> {
+        reslut = val.value.reduce((acc,val)=>{
+          return acc.concat(val.value) 
+        },[])
+      })
+      return reslut
+    }
   },
 
   mutations = {
@@ -89,9 +112,18 @@ const state = {
     setOrderId(state, id) {
       state.order_by = id
     },
-    setCurCar(state){
-      if(!state.shoppingCar[state.resId])
-        state.shoppingCar[state.resId] = {}
+    setCurCart(state) {
+      let {
+        resId,
+        shoppingCar
+      } = state;
+      
+      if (shoppingCar.length === 0 || !shoppingCar.find((val) => val.shopId === resId)){
+        shoppingCar.push({
+          shopId: resId,
+          value: []
+        })
+      }
     },
     setSupportId(state, id) {
       state.support_ids = id
@@ -102,40 +134,70 @@ const state = {
     setResId(state, id) {
       state.resId = id
     },
-    setRestaurantItems(state,payload){
+    setRestaurantItems(state, payload) {
       state.restaurant_items = payload.data
     },
-    setScroll(state,val){
+    setScroll(state, val) {
       state.is_scoll = val
     },
-    addShopCar(state,payload){
-      let cart  = state.shoppingCar[state.resId],
-      {itemid,shopdata} = payload;
-      if(!cart[itemid])
-        cart[itemid]={}
-      if(!cart[itemid][shopdata.id])
-        cart[itemid][shopdata.id] = shopdata
-      cart[itemid][shopdata.id].quantity ++
+    addShopCar(state, payload) {
+      // console.log(doneWithInsidValue(state.shoppingCar, [state.resId, payload.itemId,payload.listId]))
+      // return
+      let curShopItemCart = doneWithInsidValue(state.shoppingCar, [state.resId, payload.itemId,payload.listId]);
+      console.log(curShopItemCart)
+      switch (curShopItemCart.length) {
+        case 1:
+          curShopItemCart[0].value.push(
+            {
+              itemId: payload.itemId,
+              shopId: payload.shopId,
+              value: [{
+                itemId: payload.itemId,
+                shopId: payload.shopId,
+                listId: payload.listId,
+                value: payload.value,
+              }]
+            }
+          )
+          break;
+        case 2:
+          curShopItemCart[1].value.push(
+            {
+              itemId: payload.itemId,
+              shopId: payload.shopId,
+              listId: payload.listId,
+              value: payload.value,
+            }
+          )
+          break;
+      }
+      doneWithInsidValue(state.shoppingCar, [state.resId, payload.itemId, payload.listId], (val) => {
+        val.value.quantity++
+      })
     },
-    decreaseShopCar(state,payload) {
-      let cart  = state.shoppingCar[state.resId],
-      {itemid,shopdata} = payload;
-      cart[itemid][shopdata.id].quantity --
+    decreaseShopCar(state, payload) {
+      doneWithInsidValue(state.shoppingCar, [state.resId, payload.itemId, payload.listId], (val,index,reslut) => {
+        val.value.quantity--
+        if(val.value.quantity ==0){
+          reslut[1].value.splice(index,1)
+        }
+      })
     },
-    setCart(state,val){
-      state.shoppingCar = JSON.parse(val) 
+    setCart(state, val) {
+      state.shoppingCar = JSON.parse(val)
     }
   },
 
 
   actions = {
     fetchShopItems({
-      state,commit
+      state,
+      commit
     }) {
-     return getShiopItem(state.resId).then(
+      return getShiopItem(state.resId).then(
         res => {
-          commit('setRestaurantItems',{
-            data : res.data
+          commit('setRestaurantItems', {
+            data: res.data
           })
           return res.data
         }
@@ -147,7 +209,7 @@ const state = {
     }) {
       return getRestaurantDetail(state.resId).then(
         res => {
-            return res.data
+          return res.data
         }
       )
     }

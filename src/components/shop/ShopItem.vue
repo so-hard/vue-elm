@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-08-22 14:16:39
+ * @LastEditTime: 2019-08-29 08:28:42
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -59,7 +59,7 @@
                   <NumControl
                     @getOrderNum="getOrderNum"
                     :itemid="lists.id"
-                    :shopdata="formatData(list.specfoods[0])"
+                    :shopdata="formatData(list.specfoods[0],lists.id)"
                   />
                 </div>
               </div>
@@ -76,14 +76,30 @@
         @click="drawer = true"
       ></el-button>
     </el-badge>
-    <el-drawer title="cart" :visible.sync="drawer" direction="btt">
-      <!-- <section v-for="list in getCartShop" :key="list.id">{{list}}</section> -->
+    <el-drawer 
+    title="已选商品" 
+    :visible.sync="drawer" 
+    direction="btt" 
+    :show-close="false"
+    :destroy-on-close	="true"
+>
+      <ul class="drawer-inside">
+        <li v-for="list in getShopcartList" :key="list.listId">
+          <span class="name">{{list.value.name}}</span>
+          <span class="price">{{list.value.price*list.value.quantity}}</span>
+          <NumControl
+          @getOrderNum="getOrderNum"
+          :itemid="list.itemId"
+          :shopdata="list"
+          />
+        </li>
+      </ul>
     </el-drawer>
   </section>
 </template>
 
 <script>
-import { removeClass, setClass } from "../../extend/classAction";
+import { removeClass, setClass } from "../../extend/tool";
 import Rate from "./Rate";
 import Loading from "./../Loading";
 import NumControl from "./NumControl";
@@ -97,7 +113,7 @@ export default {
     Loading,
     NumControl,
     Rate,
-    Tag
+    Tag,
   },
   name: "shopitem",
   data() {
@@ -109,10 +125,12 @@ export default {
       scroll: "hidden",
       restaurant_items: null,
       shopCartNum: 0,
-      drawer: false
+      drawer: false,
     };
   },
   methods: {
+
+
     hey(el) {
       this.itemsHeight.forEach(val => {
         if (
@@ -151,23 +169,28 @@ export default {
         };
       });
     },
-    formatData(data) {
-      let result = {};
-      result.attrs = [];
-      result.estra = {};
-      result.id = data.food_id;
-      result.name = data.name;
-      result.packing_fee = data.packing_fee;
-      result.price = data.price;
-      result.sku_id = data.sku_id;
-      result.specs = data.specs;
-      result.stock = data.stock;
-      result.quantity = 0
+    formatData(data,itemId) {
+      let value = {},
+      result = {};
+      value.attrs = [];
+      value.estra = {};
+      value.id = data.food_id;
+      value.name = data.name;
+      value.packing_fee = data.packing_fee;
+      value.price = data.price;
+      value.sku_id = data.sku_id;
+      value.specs = data.specs;
+      value.stock = data.stock;
+      value.quantity = 0;
+      result.shopId=this.$store.state.shop.resId
+      result.itemId=itemId
+      result.listId = data.food_id
+      result.value = value
       return result
     }
   },
   computed: {
-    ...mapGetters(["getItemsHeader","getItemCartNum"]),
+    ...mapGetters(["getItemsHeader","getItemCartNum","getShopcartList"]),
   },
   created() {
     //分发action
@@ -185,7 +208,7 @@ export default {
   },
   beforeDestroy() {
     let data = this.$store.state.shop.shoppingCar;
-    console.log(data)
+    // console.log(data)
     setStore("cart", data);
   },
   watch: {
@@ -319,4 +342,19 @@ export default {
     transform: translate(-5vw, 0);
   }
 }
+  .drawer-inside
+    height 15vh
+    overflow scroll
+    li 
+      display flex;
+      justify-content space-between
+      padding 2px
+      .name
+        width 15vw
+        fontOver()
+      .price 
+        align-items center
+      // &:nth-child(2),
+      // &:nth-child(3)
+  
 </style>
