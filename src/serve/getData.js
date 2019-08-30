@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 23:00:20
+ * @LastEditTime: 2019-09-02 15:07:15
+ * @LastEditors: Please set LastEditors
+ */
 import Axios from './../extend/axios'
 
 
@@ -98,3 +105,18 @@ export  const getShiopItem = (restaurant_id) => Axios.get(
         }
     }
 )
+
+
+/**
+ * @description: 提交购物车
+ * @param {number} restaurant_id
+ * @param   {string} geohash
+ * @param {Array} entities
+ * @return: 
+ */
+export const addCharts = (restaurant_id, geohash, entities) => Axios.post('v1/carts/checkout', {
+    come_from: "web",
+    geohash,
+    entities,
+    restaurant_id,
+})

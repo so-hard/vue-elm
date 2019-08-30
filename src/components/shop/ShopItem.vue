@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-08-29 08:28:42
+ * @LastEditTime: 2019-09-02 22:39:50
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -94,6 +94,16 @@
           />
         </li>
       </ul>
+      <footer>
+        <span class="tip">{{`一共${getTotalPrice}￥`}}</span>
+        <el-button 
+        type="primary" 
+        :disabled="getTotalPrice>=20 ?false:true"
+        @click="done()"
+        >
+        {{getTotalPrice>=20?`结算`:`还差${20-getTotalPrice}￥`}}
+        </el-button>
+      </footer>
     </el-drawer>
   </section>
 </template>
@@ -129,8 +139,12 @@ export default {
     };
   },
   methods: {
-
-
+    done(){
+      let cityAdress = this.$store.state.city
+      this.$store.dispatch('fetchShopCarts',{
+        geohash: cityAdress.curAddress ? cityAdress.curAddress.geohash : cityAdress.defaultAddress.geohash
+    })
+    },
     hey(el) {
       this.itemsHeight.forEach(val => {
         if (
@@ -191,6 +205,10 @@ export default {
   },
   computed: {
     ...mapGetters(["getItemsHeader","getItemCartNum","getShopcartList"]),
+    getTotalPrice(){
+      let _totalPrice =this.getShopcartList.reduce((acc,val)=>acc+val.value.price*val.value.quantity,0)
+     return  _totalPrice 
+    }
   },
   created() {
     //分发action
@@ -345,6 +363,7 @@ export default {
   .drawer-inside
     height 15vh
     overflow scroll
+    margin-bottom 2vw
     li 
       display flex;
       justify-content space-between
@@ -354,6 +373,20 @@ export default {
         fontOver()
       .price 
         align-items center
+        color red
+        &::before
+          content '￥'
+          font-size 0.8em
+  footer 
+    display flex
+    width 100vw
+    padding 1vw
+    .el-button
+      max-width 30vw
+    .tip
+      flex-grow 1
+      text-align center
+      line-height 1em
       // &:nth-child(2),
       // &:nth-child(3)
   

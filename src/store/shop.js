@@ -2,13 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-23 09:10:54
- * @LastEditTime: 2019-08-29 18:34:36
+ * @LastEditTime: 2019-09-02 16:00:57
  * @LastEditors: Please set LastEditors
  */
 
 import {
   getShiopItem,
-  getRestaurantDetail
+  getRestaurantDetail,
+  addCharts
 } from "./../serve/getData";
 import {
   doneWithInsidValue
@@ -212,6 +213,16 @@ const state = {
           return res.data
         }
       )
+    },
+    
+    fetchShopCarts({state,getters},{geohash}){
+     let entities = [getters.getShopcartList.map(
+      (val)=> val.value
+    )]
+      return addCharts(state.resId,geohash,entities).then(
+        res =>{
+          console.log(res)
+      })
     }
   }
 
