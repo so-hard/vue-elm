@@ -1,5 +1,13 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 23:00:20
+ * @LastEditTime: 2019-09-03 00:09:45
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="login">
+    <CommentHeader background='transparent' position='static'/>
     <div class="login-img">
       <el-image style="width: 130px; height: 56px" :src="url" fit="contain"></el-image>
     </div>
@@ -44,7 +52,11 @@ import { getCaptchas, signOut } from "../serve/getData.js";
 import { mapMutations } from "vuex";
 // import { readlink } from 'fs';
 // axios.defaults.withCredentials = true
+import  CommentHeader from "./../components/CommentHeader"
 export default {
+  components: {
+    CommentHeader
+  },
   name: "login",
   data() {
     return {

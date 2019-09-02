@@ -2,11 +2,12 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-17 14:53:49
- * @LastEditTime: 2019-08-29 07:52:33
+ * @LastEditTime: 2019-09-03 00:07:26
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <section class="shop-detail"  v-scroll={hey,time:0}>
+    <CommentHeader background='transparent' position='absolute'/>
     <header>
       <section class="header-top" :style="img">
         <img :src="baseImg+headerDate.image_path" alt="">
@@ -32,8 +33,12 @@
 </template>
 
 <script>
+import CommentHeader from './../../components/CommentHeader'
 export default {
   name: 'shopdetail',
+  components:{
+    CommentHeader
+  },
   data() {
     return{
       headerDate: [],

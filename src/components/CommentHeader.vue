@@ -1,5 +1,12 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 23:00:20
+ * @LastEditTime: 2019-09-03 00:12:54
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
-  <div class="comment-header">
+  <div class="comment-header" :style="backColorAndPosition">
       <div class="header-svg" @click="headGo()">
       <svg class="icon" aria-hidden="true">
         <use :xlink:href="showHeaderIcon"></use>
@@ -26,7 +33,7 @@ export default {
     };
   },
   //传入三个props 左边的图标 文字  左边图标的转跳， footerRouter
-  props: ["headerIcon",'routerNext', "headerText","textRouter",'footerIcon','footerRouter' ],
+  props: ["headerIcon",'routerNext', "headerText","textRouter",'footerIcon','footerRouter',"background",'position'],
   methods: {
     headGo(){
       if(this.routerNext){
@@ -53,6 +60,12 @@ export default {
       },
       showFooterIcon(){
         return  this.footerIcon ? this.footerIcon : this.defineFooterIcon
+      },
+      backColorAndPosition(){
+        return {
+          background: this.background,
+          position: this.position 
+        }
       }
   }
 };
@@ -75,5 +88,7 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+    div 
+      margin 1vw
 </style>
 

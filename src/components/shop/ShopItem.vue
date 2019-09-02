@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-09-02 23:03:28
+ * @LastEditTime: 2019-09-02 23:19:25
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -81,7 +81,6 @@
     :visible.sync="drawer" 
     direction="btt" 
     :show-close="false"
-    :destroy-on-close	="true"
 >
       <ul class="drawer-inside">
         <li v-for="list in getShopcartList" :key="list.listId">
@@ -386,7 +385,7 @@ export default {
     .tip
       flex-grow 1
       text-align center
-      line-height 1em
+      line-height 2em
       // &:nth-child(2),
       // &:nth-child(3)
   
