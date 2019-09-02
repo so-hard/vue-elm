@@ -2,7 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-23 09:10:54
+<<<<<<< HEAD
  * @LastEditTime: 2019-09-02 16:00:57
+=======
+ * @LastEditTime: 2019-09-02 23:03:27
+>>>>>>> fb5bdd888e333b1b111ea3ae103a33bbf91eaae2
  * @LastEditors: Please set LastEditors
  */
 
