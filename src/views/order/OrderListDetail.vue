@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 23:00:20
+ * @LastEditTime: 2019-09-03 15:33:40
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="order-list-detail">
     <CommentHeader headerText="订单详情"/>
@@ -146,7 +153,7 @@ detail-comment-style()
     background-color #fafafa
     margin 4vw 0  
     width 95vw
-    box-shadow 0 0 2vw 0.5vw #bdbdbd 
+    // box-shadow 0 0 vw 0.5vw #bdbdbd 
     display flex
     flex-direction column
     align-items center

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-21 23:00:20
+ * @LastEditTime: 2019-09-03 15:34:25
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="order-list" @click="goto(listData.unique_id)" >
     <div class="list-img">
@@ -54,7 +61,7 @@ export default {
     display flex
     height 25vw
     padding 10px
-    box-shadow 0 0 10px 1px #9e9e9e
+    // box-shadow 0 0 10px 1px #9e9e9e
     .list-content
         width 80%
         display flex
