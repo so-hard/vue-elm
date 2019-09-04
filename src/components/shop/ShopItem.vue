@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-19 17:56:41
- * @LastEditTime: 2019-09-02 23:19:25
+ * @LastEditTime: 2019-09-03 14:38:16
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -114,6 +114,7 @@ import Loading from "./../Loading";
 import NumControl from "./NumControl";
 import Tag from "./../Tag"
 
+import {Message}  from "element-ui"
 import { setStore } from "./../../extend/storage";
 import { mapGetters } from "vuex";
 
@@ -139,10 +140,23 @@ export default {
   },
   methods: {
     done(){
-      let cityAdress = this.$store.state.city
-      this.$store.dispatch('fetchShopCarts',{
-        geohash: cityAdress.curAddress ? cityAdress.curAddress.geohash : cityAdress.defaultAddress.geohash
-    })
+      let cityAdress = this.$store.state.city;
+      if(this.$store.state.user.userId){
+        this.$store.dispatch('fetchShopCarts',{
+          geohash: cityAdress.curAddress ? cityAdress.curAddress.geohash : cityAdress.defaultAddress.geohash}).then(()=>{
+            this.$router.push('/ordercheckt')
+          })
+      }else {
+        Message({
+          message: '请先登录',
+          type: 'warning',
+          duration: 1200,
+          showClose: true,
+          offset: 200
+        })
+      }
+        
+
     },
     hey(el) {
       this.itemsHeight.forEach(val => {

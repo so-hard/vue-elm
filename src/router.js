@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-18 13:39:20
+ * @LastEditTime: 2019-09-03 12:03:08
+ * @LastEditors: Please set LastEditors
+ */
 
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -81,5 +88,10 @@ export default new Router({
         },
       ]
     },
+    {
+      path: '/ordercheckt',
+      name: 'ordercheckt',
+      component: () => import('./views/order/OrderCheckt.vue'),
+    }
   ]
 })

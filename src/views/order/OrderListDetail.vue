@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-21 23:00:20
- * @LastEditTime: 2019-09-03 15:33:40
+ * @LastEditTime: 2019-09-03 19:04:29
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -149,14 +149,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-detail-comment-style()
-    background-color #fafafa
-    margin 4vw 0  
-    width 95vw
-    // box-shadow 0 0 vw 0.5vw #bdbdbd 
-    display flex
-    flex-direction column
-    align-items center
+@import "../../assets/css/mix"
+
 
 .order-list-detail 
   // margin: 15vw 0 0 0;
